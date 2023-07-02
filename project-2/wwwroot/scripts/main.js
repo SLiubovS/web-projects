@@ -156,22 +156,35 @@ alert(user.name);
 //     P.S. Используйте typeof для проверки, что значение свойства числовое.
 
 // typeof 0 // "number"
-function multiplyNumeric(obj) {
-    for(let key in obj) {
-       if(typeof obj[key] == "number") {
-           obj[key] *= 2;
-       }
-    }
-}
 
-let menu = {
-        width: 200,
-        height: 300,
-        title: "My menu"
-     };
+// примитивные типы данных(например число(number)), передаются в функцию путем копирования (по значению).
+// Объекты передаются в функции путем копирования ссылки (по ссылке).
 
-multiplyNumeric(menu);
+// function multiplyNumeric(obj) {
+//     for(let key in obj) {
+//         if(typeof obj[key] == "number") {
+//             obj[key] *= 2;
+//         }
+//     }
+// };
+//
+//
+// let menu = {
+//         width: 200,
+//         height: 300,
+//         title: "My menu"
+//      };
+//
+// multiplyNumeric(menu);
+//
+// alert(menu.width);
+// alert(menu.height);
+// alert(menu.title);
 
-alert(menu.width);
-alert(menu.height);
-alert(menu.title);
+
+
+
+
+
+
+
