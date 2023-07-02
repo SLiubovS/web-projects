@@ -182,9 +182,12 @@ alert(user.name);
 // alert(menu.title);
 
 
-
-
-
+//
+// // задание сравнение объектов
+// const obj = {x:10, y:5};
+// const obj2 =  {x:10, y:5};
+//
+// alert((obj.x == obj2.x) && (obj.y == obj2.y));
 
 
 
