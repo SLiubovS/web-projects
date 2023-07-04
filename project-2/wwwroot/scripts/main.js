@@ -252,3 +252,215 @@ alert(user.name);
 // alert( calculator.sum() );
 // alert( calculator.mul() );
 
+
+
+
+
+
+
+// Задача цепь вызовов
+
+// У нас есть объект ladder (лестница), который позволяет подниматься и спускаться:
+
+// let ladder = {
+//     step: 0,
+//     up() {
+//         this.step++;
+//     },
+//     down() {
+//         this.step--;
+//     },
+//     showStep: function() { // показывает текущую ступеньку
+//         alert( this.step );
+//     }
+// };
+// Теперь, если нам нужно выполнить несколько последовательных вызовов, мы можем сделать это так:
+// ladder.up();
+// ladder.up();
+// ladder.down();
+// ladder.showStep(); // 1
+// ladder.down();
+// ladder.showStep(); // 0
+// Измените код методов up, down и showStep таким образом, чтобы их вызов можно было сделать по цепочке, например так:
+//
+// ladder.up().up().down().showStep().down().showStep(); // показывает 1 затем 0
+// Такой подход широко используется в библиотеках JavaScript.
+
+
+// let ladder = {
+//     step: 0,
+//     up() {
+//         this.step++;
+//         return this;
+//     },
+//     down() {
+//         this.step--;
+//         return this;
+//     },
+//     showStep: function() { // показывает текущую ступеньку
+//         alert( this.step );
+//         return this;
+//     }
+// };
+// ladder.up().up().down().showStep().down().showStep();
+
+
+
+// new
+// Задачи
+
+// Создайте калькулятор при помощи конструктора, new Calculator
+// Создайте функцию-конструктор Calculator, которая создаёт объекты с тремя методами:
+//
+// read() запрашивает два значения при помощи prompt и сохраняет их значение в свойствах объекта.
+// sum() возвращает сумму этих свойств.
+// mul() возвращает произведение этих свойств.
+// Например:
+//
+// let calculator = new Calculator();
+// calculator.read();
+//
+// alert( "Sum=" + calculator.sum() );
+// alert( "Mul=" + calculator.mul() );
+
+
+
+
+// function Calculator(name){
+//     this.name = name;
+//     this.read = function() {
+//         this.a = prompt('a?', '');
+//         this.b = prompt('b?', '');
+//     };
+//         this.sum = function() {
+//             return +this.a + +this.b;
+//         };
+//
+//         this.mul = function() {
+//             return this.a * this.b;
+//         };
+//
+// }
+//
+
+
+
+// сщздание функции-калькулятор с циклом внутри
+
+// let calculator = new Calculator('Nike');
+// alert("Калькулятор называется: " + calculator.name);
+//
+// while (true) {
+//
+//     calculator.read();
+//     alert( "Sum=" + calculator.sum() );
+//     alert( "Mul=" + calculator.mul() );
+//     let exit = prompt('Вы хотите выйти?', 'Да');
+//     if(exit == "Да") {
+//         break;
+//     }
+// }
+
+
+
+
+// function test(a,b) {
+//     alert("a= " + a);
+//     alert("b= " + b);
+// };
+// let i = prompt('i?', '');
+// let j = prompt('j?', '');
+//
+// test(i,j);
+
+// function Test(a,b) {
+//     this.a = a;
+//     this.b= b;
+//     this.show = function() {
+//         alert("a= " + this.a);
+//         alert("b= " + this.b);
+//     }
+// }
+//
+// let test1 = new Test(5,10);
+// test1.show();
+//
+// let x = prompt('x?','');
+// let y = prompt('y?','');
+//
+// let test2 = new Test(x,y);
+//
+// test2.show();
+
+
+
+
+
+
+//
+// Создайте new Accumulator
+//
+// Создайте функцию-конструктор Accumulator(startingValue).
+//
+//     Объект, который она создаёт, должен уметь следующее:
+//
+//     Хранить «текущее значение» в свойстве value. Начальное значение устанавливается в аргументе конструктора startingValue.
+//     Метод read() должен использовать prompt для считывания нового числа и прибавления его к value.
+//     Другими словами, свойство value представляет собой сумму всех введённых пользователем значений, с учётом начального значения startingValue.
+//
+//     Ниже вы можете посмотреть работу кода:
+//
+//     let accumulator = new Accumulator(1); // начальное значение 1
+//
+// accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
+// accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
+//
+// alert(accumulator.value); // выведет сумму этих значений
+
+
+// function Accumulator(startingValue) {
+//     this.value = startingValue;
+//     this.read = function() {
+//        let a = +prompt('Введите число','');
+//        this.value += a;
+//     }
+// }
+//
+// let acc = new Accumulator(5);
+// alert(acc.value);
+// acc.read();
+// alert(acc.value);
+
+
+// Создать функцию-конструктор Car
+// объект который он создает должен иметь
+// свойства: color (цвет машины) и speed (скорость машины)
+// метод: SetSpeed (метод который устанавливает скорость машины)
+// при создании машины можно указать ее цвет (строкой) скорость изначально равна 0
+
+
+// function Car(color) {
+//     this.speed = 0;
+//     this.color = color;
+//     this.SetSpeed = function(speed){
+//         this.speed = speed;
+//     }
+// }
+//
+//
+//
+//
+// // пример использования
+// let vesta = new Car("yellow");
+// alert(vesta.speed); // 0
+// alert(vesta.color); // black
+// vesta.SetSpeed(60);
+// alert(vesta.speed); // 60
+
+
+
+
+
+
+
+
