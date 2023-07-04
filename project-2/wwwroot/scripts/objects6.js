@@ -9,8 +9,7 @@ const objects6 = function () {
                 obj[key] *= 2;
             }
         }
-    };
-
+    }
 
     let menu = {
         width: 200,
