@@ -9,6 +9,8 @@
 
 const objects24 = function () {
 
+    alert("Задача 24 не реализована!");
+
     // пример работы с объектом phone
 
     // let phone = new Phone("+79258317839");
