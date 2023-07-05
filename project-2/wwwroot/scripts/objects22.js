@@ -8,5 +8,24 @@
 // площадь тоже выводить если был реализован метод расчета площади
 
 const objects22 = function () {
-    alert("Задача 22 не реализована!");
+    let triangle = {
+        read() {
+            this.a = prompt('a?', '');
+            this.b = prompt('b?', '');
+            this.c = prompt('c?', '');
+            },
+
+        p() {
+            return (+this.a + +this.b + +this.c);
+        },
+        area() {
+            return ((this.p() * ((this.p() - this.a) * (this.p() - this.b) * (this.p() - this.c))) ** (1/2));
+        }
+    }
+    triangle.read();
+    alert(triangle.p());
+    alert(triangle.area());
 };
+
+
+

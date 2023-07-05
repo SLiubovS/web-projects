@@ -11,5 +11,34 @@
 // что такое факториал можно посмотреть вот тут https://skillbox.ru/media/code/chto-takoe-faktorial-i-kak-ego-vychislit/
 
 const objects20 = function () {
-    alert("Задача 20 не реализована!");
+
+
+    let x = +prompt('Введите число', '');
+
+    if(isNaN(x)) {
+        alert('Вы ввели не число');
+    } else if(x <= 0) {
+        alert('Неверно, введите положительное число');
+    }
+
+    function factorial(n) {
+
+        let result = 1;
+
+        for (let i = 1; i <= n; i++) {
+            result *= i;
+        }
+
+        return result;
+    }
+
+
+
+
+
+
+
+
+    alert( factorial(x) );
+
 };
