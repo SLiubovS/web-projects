@@ -8,6 +8,7 @@
 // площадь тоже выводить если был реализован метод расчета площади
 
 const objects22 = function () {
+
     let triangle = {
         read() {
             this.a = prompt('a?', '');
