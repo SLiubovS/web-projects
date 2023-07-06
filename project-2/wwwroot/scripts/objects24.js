@@ -8,18 +8,27 @@
 
 
 const objects24 = function () {
+    function Phone(myNumber) {
+        this.myNumber = myNumber;
+        this.otherNumber = null;
+        this.startCall = function (a) {
+            if (this.otherNumber !== null) {
+                alert(`нельзя позвонить на номер  ${a} пока не окончен разговор с ${this.otherNumber}`)
+            }
+            this.otherNumber = a;
+        };
+        this.endCall = function () {
+            this.otherNumber = null;
+        }
+    }
 
-    alert("Задача 24 не реализована!");
-
-    // пример работы с объектом phone
-
-    // let phone = new Phone("+79258317839");
-    // alert(phone.myNumber); // выведем на экран +79258317839
-    // alert(phone.otherNumber); // выведем на экран null
-    // phone.startCall("+79031722479");
-    // alert(phone.otherNumber); // выведем на экран +79031722479
-    // phone.startCall("100"); // выведем на экран "нельзя позвонить на номер 100 пока не окончен разговор с +79031722479"
-    // phone.endCall();
-    // phone.startCall("100");
-    // alert(phone.otherNumber); // выведем на экран 100
+    let phone = new Phone("+79258317839");
+    alert(phone.myNumber); // выведем на экран +79258317839
+    alert(phone.otherNumber); // выведем на экран null
+    phone.startCall("+79031722479");
+    alert(phone.otherNumber); // выведем на экран +79031722479
+    phone.startCall("100"); // выведем на экран "нельзя позвонить на номер 100 пока не окончен разговор с +79031722479"
+    phone.endCall();
+    phone.startCall("100");
+    alert(phone.otherNumber); // выведем на экран 100
 };
