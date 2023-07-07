@@ -8,27 +8,26 @@
 //
 
 
-
 const objects26 = function () {
 
-function readNumber() {
+    function readNumber() {
 
-    while (true) {
+        while (true) {
 
-        let a = +prompt('Введите число', '0');
+            let a = +prompt('Введите число', '0');
 
-        if (a === null) {
-            return null;
+            if (a === null) {
+                return null;
+            }
+
+            if (isNaN(a)) {
+                continue;
+            }
+
+            return a;
         }
-
-        if (isNaN(a)) {
-            continue;
-        }
-
-        return a;
     }
-}
 
-alert("Число: " + readNumber());
+    alert("Число: " + readNumber());
 
 };
