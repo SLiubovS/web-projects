@@ -16,6 +16,6 @@ const objects27 = function () {
        return min + Math.random() * (max - min);
    }
     alert( random(1, 5) );
-    alert( random(0, 1) );
-    alert( random(0, 1) );
+    alert( random(1, 5) );
+    alert( random(1, 5) );
 };
