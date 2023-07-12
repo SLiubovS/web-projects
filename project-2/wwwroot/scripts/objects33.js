@@ -25,20 +25,23 @@ const objects33 = function () {
 
     let element = prompt('Введите новое значение элемента массива', 'Классика');
 
-if ((styles.length % 2) === 0) {
 
-    let a = (styles.length / 2) - 1;
-    styles[a] = element;
-}
-   else {
+    if ((styles.length % 2) === 0) {
 
-       let a = Math.trunc(styles.length / 2);
-    styles[a] = element;
-}
+        let a = (styles.length / 2) - 1;
+        styles[a] = element;
+    } else {
 
-alert(styles);
+        let a = Math.trunc(styles.length / 2);
+        styles[a] = element;
+    }
 
-
+    alert(styles);
+    styles.shift();
+    alert(styles);
+    styles.unshift('Рэп', 'Рэгги');
+    alert(styles);
+};
 
 
 //     // 3. заменить значение в середине, это заменить элемент массива который не равен 0 и не равен конечному элементу,
@@ -48,50 +51,8 @@ alert(styles);
 //     // если условия сравнения не выполняются, то возвращаем массив как есть, без изменений
 //     // чтобы условие работало для массивов любой длины
 //
-//     function replace() {
-//         // написать код для поиска значнений в середине массива
-//         let len = styles.length;
-//     //
-//         for (let i = 0; i < len; i++) {
-//
-//             if (i === 1 && i < len) {
-// return i;
-// break;
-//             }
-//             return styles;
-//         }
-//         styles[1] = b;
-//         alert (styles);
-//     }
-//     //
-//     //     if ((i > 0) && (i < len)) {
-//     //         alert(replace()(styles[1]));
-//     //         styles[1] = b;
-//     //         alert(replace()(styles[1]));
-//     //         alert(replace()(styles));
-//     //     }
-//     //     alert (styles);
-//     // }
-//     //
-//
-//     alert(replace());
 
-    // function replace(styles) {
-    //
-    //     for (let a of styles) {
-    //         if ((a >= 0) && (a < len)) {
-    //             return a;
-    //         } else if (a === 1) {
-    //             let d = styles[1];
-    //             styles[1] = element;
-    //             break;
-    //         }
-    //     }
-    // return d;
-    // }
-    //
-    // alert(replace(styles));
-};
+
 
 
 
