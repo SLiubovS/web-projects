@@ -12,11 +12,10 @@ const objects34 = function () {
 
     function sumInput() {
         let arr = [];
-        let i = 0;
         let sum = 0;
 
         while (true) {
-            i = prompt('Введите число', '');
+            let i = prompt('Введите число', '');
 
             if (i === null || i === "") {
                 break;
@@ -25,11 +24,11 @@ const objects34 = function () {
                 break;
             }
 
-            let element = arr.push(i);
+            arr.push(+i);
         }
 
         for (let a = 0; a < arr.length; a++) {
-            b = (sum += +arr[a]);
+            sum += arr[a];
         }
 
         return sum;
