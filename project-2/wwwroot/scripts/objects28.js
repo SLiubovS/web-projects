@@ -13,7 +13,7 @@
 
 const objects28 = function () {
     function randomInteger(min, max) {
-        return (min + Math.random() * (max - min)).toFixed(0);
+        return (min + Math.random() * (max - min + 1)).toFixed(0);
     }
 
     alert(randomInteger(1, 5));
