@@ -1,6 +1,5 @@
-
 // Сумма введённых чисел
-// важность: 4
+
 // Напишите функцию sumInput(), которая:
 //
 // Просит пользователя ввести значения, используя prompt и сохраняет их в массив.
@@ -9,25 +8,34 @@
 //     P.S. Ноль 0 – считается числом, не останавливайте ввод значений при вводе «0».
 
 
-
 const objects34 = function () {
 
-    function sumInput(b) {
-        let arr = [0];
+    function sumInput() {
+        let arr = [];
+        let i = 0;
         let sum = 0;
-        // sum = (+arr[0] + a);
-return arr.push(sum);
-        // return (arr + arr.push("a"));
-    }
-    while (true) {
-        let a = +prompt('Введите значение', '');
-        if (isNaN(a)) {
-            break;
+
+        while (true) {
+            i = prompt('Введите число', '');
+
+            if (i === null || i === "") {
+                break;
+            }
+            if (isNaN(i)) {
+                break;
+            }
+
+            let element = arr.push(i);
         }
-        if (a === null) {
-            break;
+
+        for (let a = 0; a < arr.length; a++) {
+            b = (sum += +arr[a]);
         }
-        return sum += a;
+
+        return sum;
+
     }
-    alert(sumInput(b));
+
+    alert(sumInput());
+
 };
