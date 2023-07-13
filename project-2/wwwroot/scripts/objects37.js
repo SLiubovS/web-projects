@@ -14,8 +14,24 @@
 
 
 const objects37 = function () {
+    function camelize(str) {
+
+        let arr = str.split('-');
+
+        alert(arr); // можно удалить в финальной версии, выводила для проверки
+
+// получили arr = [background, color];
+
+        // далее нам надо перебрать элементы массива и у всех элементов, кроме нулевого сделать первый подэлемент заглавным
+
+        //     let result = arr.map(//без понятия как это применить, думаю что решать надо через map, но у меня не получилось);
+        //
+        //     return result;
+        //
 
 
-
-
+    }
+    camelize("background-color");
+    camelize("list-style-image");
+    camelize("-webkit-transition");
 };
