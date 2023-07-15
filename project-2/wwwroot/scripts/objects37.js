@@ -16,11 +16,11 @@
 const objects37 = function () {
     function camelize(str) {
 
-        let arr = str.split('-');
+        let items = str.split('-');
 
-        alert(arr); // можно удалить в финальной версии, выводила для проверки
+        alert(items); // можно удалить в финальной версии, выводила для проверки
 
-// получили arr = [background, color];
+// получили items = ["background", "color"];
 
         // далее нам надо перебрать элементы массива и у всех элементов, кроме нулевого сделать первый подэлемент заглавным
 
@@ -30,8 +30,30 @@ const objects37 = function () {
         //
 
 
+        let results = items.map((item, index) => {
+
+            if (index === 0)
+            {
+                return item;
+            }
+
+            let result = '';
+
+            for (let char of item)
+            {
+
+            }
+
+            // "background"
+
+            // item
+
+            // "background"
+            return result;
+        });
+
     }
     camelize("background-color");
-    camelize("list-style-image");
-    camelize("-webkit-transition");
+    // camelize("list-style-image");
+    // camelize("-webkit-transition");
 };
