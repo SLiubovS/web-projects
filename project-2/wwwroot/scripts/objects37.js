@@ -39,21 +39,22 @@ const objects37 = function () {
 
             let result = '';
 
-            for (let char of item)
-            {
+            for (let char of item) {
 
-            }
+
+}
 
             // "background"
 
             // item
 
             // "background"
+
             return result;
         });
 
     }
-    camelize("background-color");
+    camelize("background-color-one-prise");
     // camelize("list-style-image");
     // camelize("-webkit-transition");
 };
