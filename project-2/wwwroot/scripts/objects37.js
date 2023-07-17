@@ -16,45 +16,34 @@
 const objects37 = function () {
     function camelize(str) {
 
+        alert (`Было: ${str}`);
         let items = str.split('-');
-
-        alert(items); // можно удалить в финальной версии, выводила для проверки
-
-// получили items = ["background", "color"];
-
-        // далее нам надо перебрать элементы массива и у всех элементов, кроме нулевого сделать первый подэлемент заглавным
-
-        //     let result = arr.map(//без понятия как это применить, думаю что решать надо через map, но у меня не получилось);
-        //
-        //     return result;
-        //
-
 
         let results = items.map((item, index) => {
 
-            if (index === 0)
-            {
+            if (index === 0) {
                 return item;
             }
 
             let result = '';
 
-            for (let char of item) {
+            for (i = 0; i < item.length; i++) {
+                if (i === 0) {
+                    result += item[0].toUpperCase();
+                } else {
 
-
-}
-
-            // "background"
-
-            // item
-
-            // "background"
+                    result += item[i];
+                }
+            }
 
             return result;
         });
 
+        let resultat = results.join('');
+        return resultat;
     }
-    camelize("background-color-one-prise");
-    // camelize("list-style-image");
-    // camelize("-webkit-transition");
+
+    alert(`Стало: ${camelize("background-color")}`);
+    alert(`Стало: ${camelize("list-style-image")}`);
+    alert(`Стало: ${camelize("-webkit-transition")}`);
 };
