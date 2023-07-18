@@ -17,7 +17,15 @@
 
 const objects39 = function () {
 
+    let arr = [5, 3, 8, 1];
 
+    function filterRangeInPlace(arr, a, b) {
+        let place = arr.filter(item => ((a <= item) && (item <= b)));
 
+        let num = arr.length;
+        arr.splice(0, num, place);
+    }
 
+    filterRangeInPlace(arr, 1, 4);
+    alert(arr);
 };
