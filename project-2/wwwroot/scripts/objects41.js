@@ -17,7 +17,7 @@ const objects41 = function () {
     let arr = ["HTML", "JavaScript", "CSS"];
 
     function copySorted(arr) {
-        return (arr.slice()).sort();
+        return (arr.slice()).sort(); //копию массива через слайс получаю, а потом сортирую и возвращаю
     }
 
     let sorted = copySorted(arr);
