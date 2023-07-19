@@ -26,15 +26,28 @@ const objects37 = function () {
             }
 
             let result = '';
+            // решение Димы
+            let hasUpper = false;
 
-            for (i = 0; i < item.length; i++) {
-                if (i === 0) {
-                    result += item[0].toUpperCase();
-                } else {
-
-                    result += item[i];
+            for (let char of item) {
+                if (hasUpper) {
+                    result += char // если hasUpper === true то выполняеися вот это
+                }
+                else {
+                    result += char.toUpperCase(); // если hasUpper === false то выполняеися вот это
+                    hasUpper = true;
                 }
             }
+
+// мое решение ниже, делает тоже самое
+            // for (i = 0; i < item.length; i++) {
+            //     if (i === 0) {
+            //         result += item[0].toUpperCase();
+            //     } else {
+            //
+            //         result += item[i];
+            //     }
+            // }
 
             return result;
         });
