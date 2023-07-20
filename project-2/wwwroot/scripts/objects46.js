@@ -24,6 +24,38 @@
 
 const objects46 = function () {
 
+    let arr = [1, 2, 3];
+    alert (arr);
+
+    function shuffle (arr) {
+        // arr.reverse();
+        // for (let i of arr) {
+        //
+        // if (i[0]) {
+
+            let x = arr.at(0);
+            arr.splice(0, 1);
+            arr.push(x);
+
+            return arr;
+        }
+
+
+
+
+
+shuffle(arr);
+    alert (arr); // arr = [3, 2, 1]
+
+shuffle(arr);
+    alert (arr); // arr = [2, 1, 3]
+
+shuffle(arr);
+    alert (arr); // arr = [3, 1, 2]
+
+
+
+
 
 
 
