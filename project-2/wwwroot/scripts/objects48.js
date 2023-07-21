@@ -20,7 +20,20 @@
 
 const objects48 = function () {
 
+    let strings = ["кришна", "кришна", "харе", "харе",
+        "харе", "харе", "кришна", "кришна", ":-O"
+    ];
 
+    function unique(arr) {
+        let str = [];
 
+        for (let element of arr) {
+            if (str.findIndex(item => item === element) === -1) {
+                str.push(element);
+            }
+        }
+        return str;
+    }
 
+    alert(unique(strings));
 };
