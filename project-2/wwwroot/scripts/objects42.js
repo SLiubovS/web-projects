@@ -29,9 +29,48 @@
 //     Не лишним будет добавить обработку ошибок.
 
 
+// 1. Повторить задачи про функцию коструктор
+
+
+// часть вторая:
+
 const objects42 = function () {
 
+    function Calculator() {
 
+        this.functions = new Map();
 
+        this.calculate = function (str) {
+            let result = 0;
+            let arr = str.split(' ');
 
+            if (arr[1] === '+') {
+                result = +arr[0] + +arr[2];
+            } else if (arr[1] === '-') {
+                result = +arr[0] - +arr[2];
+            }
+            return result;
+        }
+        this.addMethod = function (name, func) {
+            this.functions.set(name, func); // не понимаю, если использовать решили map, то откуда в этой строке set ?
+            let map = new Map();
+            map.set("*", (a * b));
+            map.set("/", (a / b));
+            map.set("**", (a ** b));
+alert (map.get('*'));
+
+// не понимаю как тут map использовать и хапуталась, что в итоге получаем, переписав задачу..
+
+        }
+    }
+
+    let calc = new Calculator();
+
+    alert(calc.calculate("3 + 7"));
+    alert(calc.calculate("3 - 7"));
+
+    let powerCalc = new Calculator;
+    powerCalc.addMethod();
+    let results = powerCalc.calculate("2 ** 3");
+alert( results ); // 8
 };
