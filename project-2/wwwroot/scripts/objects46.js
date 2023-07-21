@@ -40,10 +40,6 @@ const objects46 = function () {
             return arr;
         }
 
-
-
-
-
 shuffle(arr);
     alert (arr); // arr = [3, 2, 1]
 

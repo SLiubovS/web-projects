@@ -33,9 +33,7 @@ const objects53 = function () {
             array.push(j);
         }
 
-        let result = array.join(',');
-
-        return result;
+        return array;
     }
 
     let values = ["Hare", "Krishna", "Hare", "Krishna",
