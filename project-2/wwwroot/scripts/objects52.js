@@ -1,17 +1,45 @@
-
-
+// Фильтрация уникальных элементов массива
+// важность: 5
+// Допустим, у нас есть массив arr.
+//
+//     Создайте функцию unique(arr), которая вернёт массив уникальных, не повторяющихся значений массива arr.
+//
+//     Например:
+//
+// function unique(arr) {
+//     /* ваш код */
+// }
+//
+// let values = ["Hare", "Krishna", "Hare", "Krishna",
+//     "Krishna", "Krishna", "Hare", "Hare", ":-O"
+// ];
+//
+// alert( unique(values) ); // Hare,Krishna,:-O
+// P.S. Здесь мы используем строки, но значения могут быть любого типа.
+//
+//     P.P.S. Используйте Set для хранения уникальных значений.
 
 
 const objects52 = function () {
 
-    // function compareNumber(a, b) {
-    //     if (a < b) return 1;
-    //     if (a > b) return -1;
-    //     if (a == b) return 0;
-    // }
 
-   let arr = ["алерт", "ретерн", "функция"];
+    function unique(arr) {
+        let set = new Set();
+        let array = [];
+        for (let i of arr) {
+            set.add(i);
+        }
+        for (let j of set) {
+            array.push(j);
+        }
 
-    alert (arr.sort());
+        return array;
+    }
+
+    let values = ["Hare", "Krishna", "Hare", "Krishna",
+        "Krishna", "Krishna", "Hare", "Hare", ":-O"
+    ];
+
+    alert(unique(values)); // Hare,Krishna,:-O
 
 };
