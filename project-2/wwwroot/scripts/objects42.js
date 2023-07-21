@@ -48,20 +48,27 @@ const objects42 = function () {
                 result = +arr[0] + +arr[2];
             } else if (arr[1] === '-') {
                 result = +arr[0] - +arr[2];
-            }
+            } else if (arr[1] === '+')
             return result;
         }
-        this.addMethod = function (name, func) {
-            this.functions.set(name, func); // не понимаю, если использовать решили map, то откуда в этой строке set ?
-            let map = new Map();
-            map.set("*", (a * b));
-            map.set("/", (a / b));
-            map.set("**", (a ** b));
-alert (map.get('*'));
-
-// не понимаю как тут map использовать и хапуталась, что в итоге получаем, переписав задачу..
-
-        }
+//         this.addMethod = function (name, func) {
+//             this.functions.set(name, func); // не понимаю, если использовать решили map, то откуда в этой строке set ?
+// //             let map = new Map();
+// //             map.set("*", (a * b));
+// //             map.set("/", (a / b));
+// //             map.set("**", (a ** b));
+// // alert (map.get('*'));
+//             if (name === '*') {
+//                 return sum(a, b);
+//             } else if (name === '/') {
+//                 return (a / b);
+//             } else if (name === '/') {
+//                 return (a ** b);
+//             }
+//
+// // не понимаю как тут map использовать и хапуталась, что в итоге получаем, переписав задачу..
+//
+//         }
     }
 
     let calc = new Calculator();
