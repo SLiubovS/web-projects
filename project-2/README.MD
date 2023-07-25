@@ -74,6 +74,6 @@ node app.js
 51. Задачи от Димы, отработка find / filter
 52. Фильтрация уникальных элементов массива (set / map)
 53. Отфильтруйте анаграммы (коллекция map и метод sort)
-54. / Сумма свойств объекта (Object.keys, values, entries)
-55. / Подсчёт количества свойств объекта (Object.keys, values, entries)
+54. Сумма свойств объекта (Object.keys, values, entries)
+55. Подсчёт количества свойств объекта (Object.keys, values, entries)
 
