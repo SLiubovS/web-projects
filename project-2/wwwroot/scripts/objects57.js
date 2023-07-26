@@ -19,11 +19,24 @@
 
 const objects57 = function () {
 
+    let salaries = {
+        "John": 100,
+        "Pete": 300,
+        "Mary": 250
+    };
+
+    function topSalary(salaries) {
+
+ let arr = Object.entries(salaries);
+
+ for (let a of arr) {
+     alert (a);
+ }
 
 
 
 
+    }
 
-
-
+    topSalary(salaries);
 };
