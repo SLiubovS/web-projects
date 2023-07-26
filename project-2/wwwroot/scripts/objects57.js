@@ -14,9 +14,6 @@
 //     P.S. Используйте Object.entries и деструктурирование, чтобы перебрать пары ключ/значение.
 
 
-
-
-
 const objects57 = function () {
 
     let salaries = {
@@ -27,16 +24,36 @@ const objects57 = function () {
 
     function topSalary(salaries) {
 
- let arr = Object.entries(salaries);
+        let arr = Object.entries(salaries);
+        let array = [];
+        let [user1, user2, user3] = arr;
 
- for (let a of arr) {
-     alert (a);
- }
+        let [name1, salary1] = user1;
+        let [name2, salary2] = user2;
+        let [name3, salary3] = user3;
 
 
+        array.push(salary1);
+        array.push(salary2);
+        array.push(salary3);
 
 
+        function bigSalary(a, b) {
+            if (a > b) return -1;
+            if (a < b) return 1;
+            if (a === b) return 0;
+        }
+
+        array.sort(bigSalary);
+
+        if (array[0] === salary1) {
+            return name1;
+        } if (array[0] === salary2) {
+            return name2;
+        } if (array[0] === salary3) {
+            return name3;
+        }
     }
 
-    topSalary(salaries);
+    alert(topSalary(salaries));
 };
