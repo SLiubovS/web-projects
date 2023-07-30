@@ -47,8 +47,10 @@ let users = [
         }, {})
     }
 
+    let obj = groupById(users);
 
-    groupById(users);
-
+    for (key in obj) {
+        alert(`key = ${key}, id = ${obj[key].id}, name = ${obj[key].name}, age = ${obj[key].age}`);
+    }
 
 };

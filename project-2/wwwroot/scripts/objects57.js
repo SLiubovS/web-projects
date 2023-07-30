@@ -24,35 +24,63 @@ const objects57 = function () {
 
     function topSalary(salaries) {
 
-        let arr = Object.entries(salaries);
-        let array = [];
-        let [user1, user2, user3] = arr;
+        // решение Димы:
+        let salaryPairs = Object.entries(salaries);
 
-        let [name1, salary1] = user1;
-        let [name2, salary2] = user2;
-        let [name3, salary3] = user3;
+        // salaryPairs = [["John", 100], ["Pete", 300], ["Mary", 250]];
 
+        let salaryObjects = [];
 
-        array.push(salary1);
-        array.push(salary2);
-        array.push(salary3);
+        for (let salaryPair of salaryPairs) {
+            salaryObjects.push(
+                {
+                    name: salaryPair[0],
+                    salary: salaryPair[1]
+                });
+        }
 
+        // salaryObjects = [ {name: "John", salary: 100}, {name: "Pete", salary: 300}, {name: "Mary", salary: 250} ];
 
         function bigSalary(a, b) {
-            if (a > b) return -1;
-            if (a < b) return 1;
-            if (a === b) return 0;
+            if (a.salary > b.salary) return -1;
+            if (a.salary < b.salary) return 1;
+            if (a.salary === b.salary) return 0;
         }
 
-        array.sort(bigSalary);
+        let sortedSalaryObjects = salaryObjects.sort(bigSalary);
 
-        if (array[0] === salary1) {
-            return name1;
-        } if (array[0] === salary2) {
-            return name2;
-        } if (array[0] === salary3) {
-            return name3;
-        }
+        return sortedSalaryObjects[0].name;
+
+        // let arr = Object.entries(salaries);
+        // let array = [];
+        // let [user1, user2, user3] = arr;
+        //
+        // let [name1, salary1] = user1;
+        // let [name2, salary2] = user2;
+        // let [name3, salary3] = user3;
+        //
+        //
+        // array.push(salary1);
+        // array.push(salary2);
+        // array.push(salary3);
+        //
+        //
+        // function bigSalary(a, b) {
+        //     if (a > b) return -1;
+        //     if (a < b) return 1;
+        //     if (a === b) return 0;
+        // }
+        //
+        // array.sort(bigSalary);
+        //
+        // if (array[0] === salary1) {
+        //     return name1;
+        // } if (array[0] === salary2) {
+        //     return name2;
+        // } if (array[0] === salary3) {
+        //     return name3;
+        // }
+
     }
 
     alert(topSalary(salaries));
