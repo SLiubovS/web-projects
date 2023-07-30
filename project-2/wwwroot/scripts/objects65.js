@@ -20,6 +20,15 @@
 
 const objects65 = function () {
 
+    let dateNow = new Date();
+    let datePast = new Date(2023,6, 29);
+    let diffMs = dateNow - datePast;
+    alert(`ms=${diffMs}`);
+    alert(`s=${diffMs / 1000}`);
+    alert(`m=${(diffMs / 1000) / 60}`);
+    alert(`h=${((diffMs / 1000) / 60) / 60}`);
+    alert(`d=${(((diffMs / 1000) / 60) / 60) / 24}`);
+    // new Date(year, month, date, hours, minutes, seconds, ms)
 
 
 
