@@ -19,32 +19,32 @@ const data = {
 
 function createTree(elem, input) {
 
-    const ul = document.createElement("ul");
-    elem.append(ul);
+    const ul = document.createElement("ul"); // 2. создаем тег ul внутри elem (elem = любой html тег, который может содержать контент (body, div, li,..)
+    elem.append(ul); // 3. созданный ul кладем в конец elem в качестве node (тег ul)
 
-    for (let key in input) {
-        const li = document.createElement("li");
-        li.append(key);
-        ul.append(li);
+    for (let key in input) { // 4. запускаем цикл по ключам объекта input (в данном случае data, (объект в рыбах и т.д.))
+        const li = document.createElement("li"); // 5. сщздаем элемент списка li
+        li.append(key); // 6. кладем в конец li значение полученного key в качестве node (текст)
+        ul.append(li); // 7. полученный ли кладем в конец ul
 
-        if (typeof input[key] === "object") {
+        if (typeof input[key] === "object") { // 8. проверяем содержит ли поле внутренний объект
             let hasFields = false;
 
             for (let innerKey in input[key]) {
-                hasFields = true;
+                hasFields = true; // 9. если внутренний объект содержит поля, попадаем сюда, и прерываем данный цикл, т.к. поняли, что да, это не пустой объект
                 break;
             }
 
-            if (hasFields) {
+            if (hasFields) { // 10. если внутренний объект содержит поля, то запускаем функцию (рекурсивную) в
+                             // которую передаем в качестве корневого элемента элемент списка (li) и в качестве данных внутренний объект
                 createTree(li, input[key]);
             }
         }
     }
 }
 
-createTree(document.body, data);
+createTree(document.body, data); // 1. вызываем функцию, которая создает список и передаем в нее тег body и объект с данными data
 
-//
 
 
 
