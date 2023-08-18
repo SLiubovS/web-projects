@@ -54,7 +54,8 @@
         if(children.length === 0) {
            continue;
         } else {
-            element.insertAdjacentHTML('beforeend', children.length);
+            // element.insertAdjacentText('beforeend', children.length);
+            element.childNodes[0].after(` [${children.length}]`);
         }
     }
 
