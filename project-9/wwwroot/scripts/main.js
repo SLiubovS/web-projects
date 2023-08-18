@@ -13,12 +13,14 @@ const data = {
             "яблоня": {},
             "магнолия": {}
         }
-    }
+    },
+    "Птицы": 123
 };
 
 function createTree(elem, input) {
 
     const ul = document.createElement("ul");
+    elem.append(ul);
 
     for (let key in input) {
         const li = document.createElement("li");
@@ -30,6 +32,7 @@ function createTree(elem, input) {
 
             for (let innerKey in input[key]) {
                 hasFields = true;
+                break;
             }
 
             if (hasFields) {
@@ -37,12 +40,11 @@ function createTree(elem, input) {
             }
         }
     }
-    elem.append(ul);
 }
 
 createTree(document.body, data);
 
-
+//
 
 
 
