@@ -1,50 +1,45 @@
-let dateNow = new Date(); //ms
+setDate();
 
-let hh = dateNow.getHours();
-let mm = dateNow.getMinutes();
-let ss = dateNow.getSeconds();
+function setDate() {
+    let date = new Date();
+    let hh = date.getHours();
+    let mm = date.getMinutes();
+    let ss = date.getSeconds();
 
-if (ss <= 9) {
-    ss = `0${ss}`;
+    if (ss <= 9) {
+        ss = `0${ss}`;
+    }
+    if (mm <= 9) {
+        mm = `0${mm}`;
+    }
+    if (hh <= 9) {
+        hh = `0${hh}`;
+    }
+
+    let divHh = document.getElementById('hh');
+    divHh.innerHTML = `${hh}:`;
+
+    let divMm = document.getElementById('mm');
+    divMm.innerHTML = `${mm}:`;
+
+    let divSs = document.getElementById('ss');
+    divSs.innerHTML = `${ss}`;
 }
 
-let div = document.createElement("div");
-elem = document.body;
-elem.prepend(div);
-let clock = `${hh}:${mm}:${ss}`;
+const btnStart = document.getElementById('button-start');
 
-div.className = 'container';
-let divHh = document.createElement("div");
-divHh.className = 'container-1'
-let divMm = document.createElement("div");
-divMm.className = 'container-2';
-let divSs = document.createElement("div");
-divSs.className = 'container-3';
+const btnStop = document.getElementById('button-stop');
 
-div.prepend(divSs);
-div.prepend(divMm);
-div.prepend(divHh);
+let timer = null;
 
-divHh.prepend(`${hh}:`);
-divMm.prepend(`${mm}:`);
-divSs.prepend(`${ss}`);
+btnStart.onclick = function (ev) {
+    timer = setInterval(setDate, 100);
+}
 
+btnStop.onclick = function (ev) {
+    if (timer !== null) {
+        clearInterval(timer);
+    }
+}
 
-// let click = document.getElementsByTagName('input');
-
-// for (let input of click) {
-    let timer = dateNow;
-//     if (input.value === 'Старт') {
-//
-        function clockStart() {
-            timer = setInterval(() => dateNow, 1000);
-            return timer;
-        }
-//     } else if (input.value === 'Стоп') {
-//         input.onclick = function clockStop() {
-//             dateNow.clearInterval();
-//             // setTimeout(() => { clearInterval(timer);}, 1000);
-//         }
-//     }
-// }
 
