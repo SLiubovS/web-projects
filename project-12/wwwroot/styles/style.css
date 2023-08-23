@@ -1,0 +1,19 @@
+
+.container-1,
+.container-2,
+.container-3 {
+    display: inline;
+}
+
+.container-1 {
+    color: crimson;
+}
+
+.container-2 {
+    color: green;
+}
+
+.container-3 {
+    color: blueviolet;
+}
+
