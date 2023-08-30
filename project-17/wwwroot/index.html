@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="styles/style.css">
+    <script>
+        document.onclick = function(e) { // показывает координаты точки клика
+            coords.innerHTML = e.clientX + ':' + e.clientY;
+        };
+    </script>
+</head>
+<body>
+
+Кликните в любом месте для получения координат в контексте окна.
+<br> Это для тестирования, чтобы проверить результат, который вы получили с помощью JavaScript.
+<br>
+<div id="coords">(координаты покажутся здесь)</div>
+
+
+<div id="field">
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+</div>
+
+
+<div class="triangle-right" style="left:-20px;top:-176px">1</div>
+<div class="triangle-right" style="left:-10px;top:-178px">3</div>
+<div class="triangle-right" style="left:190px;top:-40px">4</div>
+<div class="triangle-right" style="left:200px;top:-42px">2</div>
+
+
+<div id="div1"></div>
+<div id="div2"></div>
+<div id="div3"></div>
+<div id="div4"></div>
+
+<script>
+
+    let div = document.getElementById('field');
+    let divCoord = div.getBoundingClientRect();
+
+    let div1 = document.getElementById('div1');
+    let div2 = document.getElementById('div2');
+    let div3 = document.getElementById('div3');
+    let div4 = document.getElementById('div4');
+
+    let div2W = Math.round(divCoord.x + divCoord.width);
+    let div2H = Math.round(divCoord.y + divCoord.height);
+    let div3W = divCoord.x + ((div.offsetWidth - div.clientWidth) /2);
+    let div3H = divCoord.y + ((div.offsetHeight - div.clientHeight) /2);
+    let div4W = divCoord.x + divCoord.width - ((div.offsetWidth - div.clientWidth) /2);
+    let div4H = divCoord.y + divCoord.height - ((div.offsetHeight - div.clientHeight) /2);
+
+    div1.innerHTML = `Координаты первой точки ${Math.round(divCoord.x)}:${Math.round(divCoord.y)}`;
+    div2.innerHTML = `Координаты второй точки ${div2W}:${div2H}`;
+    div3.innerHTML = `Координаты третьей точки ${div3W}:${Math.round(div3H)}`;
+    div4.innerHTML = `Координаты четвертой точки ${div4W}:${Math.round(div4H)}`;
+
+</script>
+</body>
+</html>

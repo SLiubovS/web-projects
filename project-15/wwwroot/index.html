@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style> </style>
+</head>
+<body>
+
+<h2>Уведомление</h2>
+
+<script>
+
+    // {top = 0, right = 0, className, html} = obj
+    function showNotification({top = 10, right = 10, className = 'hi', html, color}) {
+        let div = document.createElement("div");
+        document.body.append(div);
+        div.className = 'notification';
+        div.classList.add = className;
+        div.innerHTML = html;
+        div.style.color = color;
+        div.top = top + 'px';
+        div.right = right + 'px';
+
+        setTimeout(() => div.remove(),1500);
+
+    }
+
+    showNotification({top: 15, right: 15, html: 'Привет!', color: 'red'});
+</script>
+</body>
+</html>
