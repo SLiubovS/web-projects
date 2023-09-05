@@ -1,0 +1,11 @@
+.divAfter {
+    display: block;
+}
+
+#spanAfter {
+    display: none;
+}
+
+span {
+    color: green;
+}
