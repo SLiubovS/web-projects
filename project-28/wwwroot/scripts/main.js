@@ -1,16 +1,5 @@
 let buttons = document.getElementsByTagName("button");
 
-// получаем координаты элемента в контексте документа
-function getCoords(elem) {
-    let box = elem.getBoundingClientRect();
-
-    return {
-        top: box.top + window.pageYOffset,
-        right: box.right + window.pageXOffset,
-        bottom: box.bottom + window.pageYOffset,
-        left: box.left + window.pageXOffset
-    };
-}
 
 
 for (let button of buttons) {
@@ -26,21 +15,21 @@ for (let button of buttons) {
                 div.id = "text";
                 div.className = 'tooltip';
                 div.textContent = button.dataset.tooltip;
-                button.append(div);
+                document.body.prepend(div);
 
                 //div.style.top = "-15px";
                 //div.style.left = "15px";
 
-                //const coords = getCoords(button);
+                const windowBtnCoords = button.getBoundingClientRect();
 
-                //div.style.top = (coords.top - 15) + "px";
-                //div.style.left = (coords.left + 15) + "px";
-                //l
-                // if (coords.top < 25) {
-                //     div.style.top = (coords.pageY + div.height - div.clientHeight + 5) + "px";
-                // } else {
-                //     div.style.top = (coords.pageY - div.height - 5) + "px";
-                // }
+                div.style.left = button.offsetLeft + "px";
+
+
+                if (windowBtnCoords.y < div.clientHeight * 1.5) {
+                    div.style.top = (button.offsetTop + 18) + "px";
+                } else {
+                    div.style.top = (button.offsetTop - 48) + "px";
+                }
                 //
                 // div.style.left = coords.left + "px";
 
