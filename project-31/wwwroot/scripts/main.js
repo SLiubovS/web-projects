@@ -3,17 +3,12 @@ let lis = document.querySelectorAll("li");
 
 ul.onclick = function (event) {
 
-    let target = event.target;
-    clickLi(target);
-}
-
-function clickLi(targetLi) {
-
-    for (let li of lis) {
-        li.classList.remove('selected');
+    if (!(event.ctrlKey || event.metaKey)) {
+        for (let li of lis) {
+            li.classList.remove('selected');
+        }
     }
-
-    targetLi.classList = 'selected';
+    event.target.classList = 'selected';
 }
 
 // вар.1
