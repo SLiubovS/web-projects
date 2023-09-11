@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #contents {
+            padding: 5px;
+            border: 1px green solid;
+        }
+    </style>
+</head>
+<body>
+
+<fieldset id="contents">
+    <legend>#contents</legend>
+    <p>
+        Как насчёт того, чтобы прочитать <a href="https://wikipedia.org">Википедию</a> или
+        посетить <a href="https://w3.org"><i>W3.org</i></a> и узнать о современных стандартах?
+    </p>
+</fieldset>
+
+<script>
+
+   let contents = document.getElementById("contents");
+
+   contents.onclick = function(event) {
+
+       let a = event.target.closest('A');
+
+       if (!a) return;
+
+           let href = event.target.getAttribute('href');
+
+           let question = confirm('хотите перейти по ссылке: ' + href + ' ?');
+
+           if(question !== true) {
+               return false;
+       }
+   }
+</script>
+</body>
+</html>
