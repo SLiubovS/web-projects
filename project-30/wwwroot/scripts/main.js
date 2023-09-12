@@ -1,29 +1,32 @@
-let thumbs = document.getElementById("thumbs");
+const thumbs = document.getElementById("thumbs");
 
-let bigImg = document.getElementById("largeImg");
-let srcBigImg = bigImg.getAttribute('src');
+const p = document.getElementsByTagName("p")[0];
 
-thumbs.onclick = function(event) {
-
+thumbs.onclick = function (event) {
     event.preventDefault();
-    // event.defaultPrevented = true;
 
-    let li = event.target.closest('li'); // проверяем, есть ли в img что-то доп. вложенное
+    let a = event.target.closest('a');
 
-    if (!li) return;
+    if (a == null) return;
 
-    let src = event.target.getAttribute('src');
+    let href = a.getAttribute('href');
 
-    srcBigImg = src; // меняем src большой картинки на src картинки на которой кликнули мышью
+    let oldImg = document.getElementById("largeImg");
+    oldImg.remove();
 
-    let clone = li.cloneNode(true);
+    let bigImg = document.createElement("img");
 
+    bigImg.id = "largeImg";
 
-    bigImg.removeAttribute('id');
-    clone.id = 'largeImg';
-    bigImg.before(clone);
+    bigImg.alt = "Large image";
 
-    bigImg.remove();
+    bigImg.src = href;
 
-    // event.defaultPrevented = false;
+    p.append(bigImg);
 }
+
+
+
+
+
+
