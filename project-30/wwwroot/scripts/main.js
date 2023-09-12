@@ -19,7 +19,7 @@ thumbs.onclick = function(event) {
     let clone = li.cloneNode(true);
 
 
-
+    bigImg.removeAttribute('id');
     clone.id = 'largeImg';
     bigImg.before(clone);
 

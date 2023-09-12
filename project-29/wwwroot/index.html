@@ -22,22 +22,59 @@
 
 <script>
 
-   let contents = document.getElementById("contents");
+    let contents = document.getElementById("contents");
+    // let links = document.querySelectorAll('a');
 
-   contents.onclick = function(event) {
+    contents.onclick = function (event) {
 
-       let a = event.target.closest('A');
+        let a = event.target.closest('a');
 
-       if (!a) return;
+        if (a == null) return;   // !a - эквивалентно a == null
 
-           let href = event.target.getAttribute('href');
+        let href = a.getAttribute('href');
 
-           let question = confirm('хотите перейти по ссылке: ' + href + ' ?');
+        let question = confirm('хотите перейти по ссылке: ' + href + ' ?');
 
-           if(question !== true) {
-               return false;
-       }
-   }
+        if (question !== true) {
+            return false;
+        }
+    }
+
+
+    // contents.onclick = function (event, target) {
+    //     let href;
+    //
+    //     if (event.target.closest('A')) {
+    //
+    //         for (let link of links) {
+    //
+    //
+    //                 // let href = event.target.getAttribute('href');
+    //                 let question = confirm('хотите перейти по ссылке: ' + link.getAttribute('href') + ' ?');
+    //                 if (question !== true) {
+    //                     return false;
+    //
+    //
+    //             }
+    //         }
+    //     }
+    // }
+
+
+    // contents.onclick = function clickLink(event) {
+    //
+    //     if(event.target.closest('A')) {
+    //         for (let link of links) {
+    //             let href = event.target.getAttribute('href');
+    //             let question = confirm('хотите перейти по ссылке: ' + href + ' ?');
+    //             if(question !== true) {
+    //                             return false;
+    //                     }
+    //         }
+    //     }
+    // }
+
+
 </script>
 </body>
 </html>
