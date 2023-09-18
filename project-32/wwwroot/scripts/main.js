@@ -8,9 +8,11 @@ let body = document.body;
 
 divHouse.onmouseover = function (event) {
 
-    let dataTooltip = event.target.getAttribute('data-tooltip');
+    console.log(event.target.tagName);
 
-    if (dataTooltip != null) {
+    let tooltipElement = event.target.closest('[data-tooltip]');
+
+    if (tooltipElement != null) {
 
         if (divTooltip != null)
         {
@@ -20,7 +22,7 @@ divHouse.onmouseover = function (event) {
         divTooltip = document.createElement("div");
 
         divTooltip.className = 'tooltip';
-        divTooltip.innerHTML = dataTooltip;
+        divTooltip.innerHTML = tooltipElement.dataset.tooltip;
         body.prepend(divTooltip);
 
         let coords = body.getBoundingClientRect();
@@ -35,3 +37,9 @@ divHouse.onmouseover = function (event) {
     }
 }
 
+divHouse.onmouseout = function () {
+    if (divTooltip != null)
+    {
+        divTooltip.remove();
+    }
+};
