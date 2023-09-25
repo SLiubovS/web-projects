@@ -24,108 +24,85 @@
 
 let hero1 = document.getElementById('hero1'); // взяли первого героя для тестов
 
-hero1.onmousedown = function (event) {
+let heroAndBall = document.getElementsByClassName('draggable');
 
-    let shiftX = event.clientX - hero1.getBoundingClientRect().left;
-    let shiftY = event.clientY - hero1.getBoundingClientRect().top;
+for (let selectedImg of heroAndBall) {
 
-    hero1.style.position = 'absolute';
-    hero1.style.zIndex = 1000;
-    document.body.append(hero1);
 
-    moveAt(event.pageX, event.pageY);
+    selectedImg.onmousedown = function (event) {
+        event.preventDefault(); // запрет на выделение текста при удержании и перемещении картинки!
 
-    function moveAt(pageX, pageY) {
-        hero1.style.left = pageX - shiftX + 'px';
-        hero1.style.top = pageY - shiftY + 'px';
-    }
+        let shiftX = event.clientX - selectedImg.getBoundingClientRect().left;
+        let shiftY = event.clientY - selectedImg.getBoundingClientRect().top;
 
-    function onMouseMove(event) {
+        selectedImg.style.position = 'absolute';
+        selectedImg.style.zIndex = 1000;
+        document.body.append(selectedImg);
+
         moveAt(event.pageX, event.pageY);
 
-        let leftEdge = event.clientX - shiftX - document.body.getBoundingClientRect().left;
-        let topEdge = event.clientY - shiftY - document.body.getBoundingClientRect().top;
-        let rightEdge = document.body.offsetWidth - hero1.offsetWidth;
-        let bottomEdge = document.body.offsetHeight - hero1.offsetHeight;
-
-        hero1.hidden = true;
-        let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
-        hero1.hidden = false;
-
-        if (leftEdge < 0) {
-            leftEdge = 0;
-            hero1.style.left = leftEdge + 'px';
+        function moveAt(pageX, pageY) {
+            selectedImg.style.left = pageX - shiftX + 'px';
+            selectedImg.style.top = pageY - shiftY + 'px';
         }
 
-        if (topEdge < 0) {
-            topEdge = 0;
-            hero1.style.top = topEdge + 'px';
-        }
+        function onMouseMove(event) {
+            moveAt(event.pageX, event.pageY);
 
-        if (leftEdge > rightEdge) {
-            leftEdge = rightEdge;
-            hero1.style.left = leftEdge + 'px';
-        }
+            let leftEdge = event.clientX - shiftX - document.body.getBoundingClientRect().left;
+            let topEdge = event.clientY - shiftY - document.body.getBoundingClientRect().top;
+            let rightEdge = document.body.offsetWidth - selectedImg.offsetWidth;
+            let bottomEdge = document.body.offsetHeight - selectedImg.offsetHeight;
 
-        if (topEdge > bottomEdge) {
-            topEdge = bottomEdge;
-            hero1.style.top = topEdge + 'px';
-        }
-        // }
-        // что надо сделать:
-        // если картинка выходит за пределы окна драузера, т.е. если ее верхние, левые и т.д. координаты больше верхней, левой и т.д. координаты окна,
-        // то запретить дальнейшее уезжание картинки, но не курсора мыши - сделала
+            // selectedImg.hidden = true;
+            // let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+            // selectedImg.hidden = false;
 
-    }
+            if (leftEdge < 0) {
+                leftEdge = 0;
+                selectedImg.style.left = leftEdge + 'px';
+            }
+
+            if (topEdge < 0) {
+                topEdge = 0;
+                selectedImg.style.top = topEdge + 'px';
+            }
+
+            if (leftEdge > rightEdge) {
+                leftEdge = rightEdge;
+                selectedImg.style.left = leftEdge + 'px';
+            }
+
+            if (topEdge > bottomEdge) {
+                topEdge = bottomEdge;
+                selectedImg.style.top = topEdge + 'px';
+            }
+            // }
+            // что надо сделать:
+            // если картинка выходит за пределы окна драузера, т.е. если ее верхние, левые и т.д. координаты больше верхней, левой и т.д. координаты окна,
+            // то запретить дальнейшее уезжание картинки, но не курсора мыши - сделала
+
+            // осталось найти все картинки, у них есть общий класс .draggable
+        }
 
 // (3) перемещать по экрану
-    document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mousemove', onMouseMove);
 
 // (4) положить мяч, удалить более ненужные обработчики событий
-    hero1.onmouseup = function () {
-        document.removeEventListener('mousemove', onMouseMove);
-        hero1.onmouseup = null;
+        selectedImg.onmouseup = function () {
+            document.removeEventListener('mousemove', onMouseMove);
+            selectedImg.onmouseup = null;
+        };
+
+        selectedImg.ondragstart = function () {
+            return false;
+        };
     };
+}
 
-    hero1.ondragstart = function () {
-        return false;
-    };
-};
 
-//     hero1.style.left = event.clientX + 'px';
-//     console.log(hero1.style.left);
-//     hero1.style.top = event.clientY + 'px';
-//     console.log(hero1.style.top);
-//     document.addEventListener('mousemove', onMouseMove);
-//
-//     let shiftX = event.clientX - hero1.getBoundingClientRect().left;
-//     let shiftY = event.clientY - hero1.getBoundingClientRect().top;
-//
-//     function onMouseMove(event) {
-//         const x = event.clientX; // получаем координату X мыши
-//         const y = event.clientY; // получаем координату Y мыши
-//
-//         console.log(`Координаты мыши: x=${x}, y=${y}`); // выводим координаты мыши в консоль
-//
-//         hero1.style.left = event.clientX - shiftX/4 + 'px';
-//         hero1.style.top = event.clientY - shiftY/4 + 'px';
-//     }
-//
-// // тут проблема, не понимаю, почему при отпускании кнопки мыши elem все равно сдвигается при наведении...
-//     hero1.onMouseUp = function () {
-//         document.removeEventListener('mousemove', onMouseMove);
-//         hero1.onMouseUp = null; // весь написанный mouseUp - из учебника, эту строку не понимаю совсем
-//     }
-// };
-// hero1.ondragstart = function () {
-//     return false;
-// }
+// проблемы которые остались:
+// 1. если взять картинку. уйти к примеру вниз курсором за границы окна браузера и отпустить левую нкнопку мыши,
+// а затем вернуться к картинке - картинка прилепает к курсору и при повторнном клике не отлипает - должна отлипнуть
 
-// }
-
-// переносимые элементы это герои и мяч
-
-// отмена браузерного действия по умолчанию, нужно повесить на мяч (картинка) и герои в дивах
-// ball.ondragstart = function() {
-//     return false;
-// };
+// 2. при опускании вниз картинки, картинка не доезжает до конца окна браузера
