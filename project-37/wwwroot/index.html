@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body,
+        html {
+            height: 100%;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+        }
+
+        #matrix {
+            width: 400px;
+            margin: auto;
+            overflow: auto;
+            text-align: justify;
+        }
+
+        #arrowTop {
+            height: 9px;
+            width: 14px;
+            color: green;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            cursor: pointer;
+        }
+
+        #arrowTop::before {
+            content: '▲';
+        }
+
+    </style>
+
+</head>
+<body>
+<div id="matrix">
+    <script>
+        for (let i = 0; i < 2000; i++) document.writeln(i)
+    </script>
+</div>
+
+<div id="arrowTop"></div>
+
+<script>
+
+    let arrowTop = document.getElementById('arrowTop');
+    window.addEventListener("scroll", onScroll);
+    document.body.getBoundingClientRect();
+    arrowTop.hidden = true;
+
+    function onScroll() {
+
+        if (window.pageYOffset > document.documentElement.clientHeight) { // если прокрутка в пикселях больше высоты окна браузера, то
+            arrowTop.hidden = false;
+
+            arrowTop.onmousedown = function (event) {
+                document.documentElement.scrollTop = 0; // прокрутка документа равна 0, т.е. ее координата топ 0
+            }
+        }
+        if (pageYOffset < document.documentElement.clientHeight) { // если прокрутка в пикселях больше высоты окна браузера, то
+            arrowTop.hidden = true;
+        }
+    }
+
+
+    // что имеем:
+    // 1. высоту окна браузера, которая не изменяется
+    // 2. координаты верхнего левого угла, которые изменяются относительно документа при прокрутке
+    // 3. если топ верхнего левого угла станет больше высоты окна браузера - изменить дисплэй стрелки?
+    // 4. при keyduwn на кнопку - совмещать левый верхний угол окна с началом браузера координаты топ 0.ю лефт 0
+    // 5. при keyup - ? нужен ли, по идее можно обнулять в null ?
+
+
+</script>
+</body>
+</html>
