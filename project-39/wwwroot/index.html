@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<select id="genres">
+    <option value="rock">Рок</option>
+    <option value="blues" selected>Блюз</option>
+</select>
+
+<script>
+
+let genres = document.getElementById('genres');
+let option = new Option('Классика', 'classic', true, true);
+genres.append(option);
+
+</script>
+</body>
+</html>
