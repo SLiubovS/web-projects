@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #mouse,
+        #mouse2 {
+            display: inline-block;
+            cursor: pointer;
+            margin: 0;
+        }
+
+        #mouse2 {
+            color: #00cc33;
+        }
+
+        #mouse:focus {
+            outline: 1px dashed black;
+        }
+
+        #mouse2:focus {
+            outline: 1px dashed #00cc33;
+        }
+    </style>
+</head>
+<body>
+<p>Кликните по "изображению" мыши и перемещайте её с помощью клавиш со стрелками.</p>
+
+<pre id="mouse">
+ _   _
+(q\_/p)
+ /. .\
+=\_t_/=   __
+ /   \   (
+((   ))   )
+/\) (/\  /
+\  Y  /-'
+ nn^nn
+</pre>
+
+<pre id="mouse2">
+ _   _
+(q\_/p)
+ /. .\
+=\_t_/=   __
+ /   \   (
+((   ))   )
+/\) (/\  /
+\  Y  /-'
+ nn^nn
+</pre>
+
+<script>
+    let mouse = document.getElementById("mouse");
+    mouse.tabIndex = 1;
+    mouse.onfocus = function () {
+        this.addEventListener("keydown", keydown);
+        this.getBoundingClientRect();
+        this.style.position = "fixed";
+    }
+
+    let mouse2 = document.getElementById("mouse2");
+    mouse2.tabIndex = 2;
+    mouse2.onfocus = function () {
+        this.addEventListener("keydown", keydown);
+        this.getBoundingClientRect();
+        this.style.position = "fixed";
+    }
+
+    function keydown(event) {
+
+        if (event.key === "ArrowUp") {  // стрелка вверх
+            this.style.top = this.offsetTop - this.clientHeight + "px";
+        }
+        if (event.key === 'ArrowLeft') {  // стрелка в лево
+            this.style.left = this.offsetLeft - this.clientWidth + "px";
+        }
+        if (event.key === 'ArrowDown') { // стрелка вниз
+            this.style.top = this.offsetTop + this.clientHeight + "px";
+        }
+        if (event.key === 'ArrowRight') { // стрелка вправо
+            this.style.left = this.offsetLeft + this.clientWidth + "px";
+        }
+    }
+</script>
+</body>
+</html>
