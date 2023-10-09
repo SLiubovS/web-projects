@@ -1,76 +1,111 @@
-let hero1 = document.getElementById('hero1'); // взяли первого героя для тестов
+// перетаскиваемый элемент
+class DraggableElement {
+    constructor(element, shiftX, shiftY) {
+        this.element = element;
+        this.shiftX = shiftX;
+        this.shiftY = shiftY;
+    }
 
-let heroAndBall = document.getElementsByClassName('draggable');
+    // переместить элемент
+    moveAt(pageX, pageY) {
 
-let handlers = [];
+        // вычисляем целевые координаты верхнего левого угла элемента
+        let x = pageX - this.shiftX;
+        let y = pageY - this.shiftY;
 
-for (let selectedImg of heroAndBall) {
-
-
-    selectedImg.onmousedown = function (event) {
-        event.preventDefault(); // запрет на выделение текста при удержании и перемещении картинки!
-
-        let shiftX = event.clientX - selectedImg.getBoundingClientRect().left;
-        let shiftY = event.clientY - selectedImg.getBoundingClientRect().top;
-
-        selectedImg.style.position = 'absolute';
-        selectedImg.style.zIndex = 1000;
-
-        moveAt(event.pageX, event.pageY);
-
-        function moveAt(pageX, pageY) {
-            selectedImg.style.left = pageX - shiftX + 'px';
-            selectedImg.style.top = pageY - shiftY + 'px';
+        // проверяем будет ли выходить элемент за левую гранцу экрана
+        if (x < 0)
+        {
+            // если будет выходить, то корректируем его координату по X
+            x = 0;
         }
 
-        let onMouseMove = function (event) {
-
-                moveAt(event.pageX, event.pageY);
-
-                let leftEdge = event.clientX - shiftX - document.body.getBoundingClientRect().left;
-                let topEdge = event.clientY - shiftY - document.body.getBoundingClientRect().top;
-                let rightEdge = document.body.offsetWidth - selectedImg.offsetWidth;
-                let bottomEdge = document.body.offsetHeight - selectedImg.offsetHeight;
-
-                if (leftEdge < 0) {
-                    leftEdge = 0;
-                    selectedImg.style.left = leftEdge + 'px';
-                }
-
-                if (topEdge < 0) {
-                    topEdge = 0;
-                    selectedImg.style.top = topEdge + 'px';
-                }
-
-                if (leftEdge > rightEdge) {
-                    leftEdge = rightEdge;
-                    selectedImg.style.left = leftEdge + 'px';
-                }
-
-                if (topEdge > bottomEdge) {
-                    topEdge = bottomEdge;
-                    selectedImg.style.top = topEdge + 'px';
-                }
+        // проверяем будет ли выходить элемент за правую гранцу экрана
+        if (document.body.offsetWidth - (x + this.element.offsetWidth) < 0)
+        {
+            // если будет выходить, то корректируем его координату по X
+            x = document.body.offsetWidth - this.element.offsetWidth;
         }
-        handlers.push(onMouseMove);
 
-        document.addEventListener('mousemove', onMouseMove);
+        // см https://learn.javascript.ru/size-and-scroll-window#shirina-vysota-dokumenta
+        let scrollHeight = Math.max(
+            document.body.scrollHeight, document.documentElement.scrollHeight,
+            document.body.offsetHeight, document.documentElement.offsetHeight,
+            document.body.clientHeight, document.documentElement.clientHeight
+        );
 
-        selectedImg.onmouseup = function (event) {
 
-            for (let handler of handlers) {
-                document.removeEventListener('mousemove', handler);
-            }
+        // проверяем будет ли выходить элемент за верхнюю гранцу экрана
+        if (y < 0)
+        {
+            // если будет выходить, то корректируем его координату по Y
+            y = 0;
+        }
 
-            handlers.clear();
+        // проверяем будет ли выходить элемент за нижнюю гранцу экрана
+        if (scrollHeight - (y + this.element.offsetHeight) < 0)
+        {
+            // если будет выходить, то корректируем его координату по Y
+            y = scrollHeight - this.element.offsetHeight;
+        }
 
-            event.target.onmouseup = null;
-        };
+        // делаем scroll по Y координате
+        window.scrollTo(0, y);
 
-        selectedImg.ondragstart = function () {
-            return false;
-        };
-    };
+        // выставляем целевые координаты перетаскиваемому элементу
+        this.element.style.left = x + 'px';
+        this.element.style.top = y + 'px';
+    }
 }
 
+// элемент который в настоящий момент перетаскиваем
+let _draggableElement = null;
 
+// событие - нажимаем на кнопку мыши на документе
+document.onmousedown = function (event) {
+
+    // проверяем что нажали на элемент с классом .draggable
+    if (event.target.closest('.draggable'))
+    {
+        // запрет на выделение текста при удержании и перемещении картинки!
+        event.preventDefault();
+
+        // убираем стандартный Drag'n'Drop
+        event.target.ondragstart = function () {
+            return false;
+        };
+
+        // получаем информацию о размерах элемента и его позиционирования относительно окна браузера
+        let draggableElementRect = event.target.getBoundingClientRect();
+
+        // сдвиг курсора мыши внутри выбранного элемента
+        let shiftX = event.clientX - draggableElementRect.left;
+        let shiftY = event.clientY - draggableElementRect.top;
+
+        // выставляем элементу абсолютное позиционирование с больщим z индекс
+        event.target.style.position = 'absolute';
+        event.target.style.zIndex = 1000;
+
+        // создаем объект <<перемещаемый элемент>>
+        _draggableElement = new DraggableElement(event.target, shiftX, shiftY);
+        // передвигаем элемент т.к. изменили ему position на absolute
+        _draggableElement.moveAt(event.pageX, event.pageY);
+    }
+};
+
+// событие - передвигаем курсор мыши на документе
+document.onmousemove = function (event) {
+
+    // если элемент для перемещения не выбран, то ничего не делаем
+    if (_draggableElement == null) {
+        return;
+    }
+
+    // передвигаем элемент
+    _draggableElement.moveAt(event.pageX, event.pageY);
+};
+
+// событие - отпускаем кнопку мыши на документе
+document.onmouseup = function () {
+    _draggableElement = null;
+};
