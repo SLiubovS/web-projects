@@ -6,130 +6,46 @@
 </head>
 <body>
 
-<!--<div id="text">Введите набор клавиш, по окончанию введения <br>нажмите клавишу "Enter"</div>-->
-<!--<br><br>-->
-
 <div>Нажмите "Q" и "W" вместе (язык значения не играет).</div>
 
 <script>
 
-    // попытка написать данную функцию
     function runOnKeys(func, code1, code2, ...code_n) {
 
-        let collection = new Set; // создаем коллекцию значений, пока пустая
+        let collection = new Set;
 
-        // Событие keydown происходит при нажатии клавиши, а keyup – при отпускании.
+        document.addEventListener('keydown', onKeydown);
+        document.addEventListener('keyup', onKeyup);
 
-        // далее нажимаем клавиши на клавиатуре и считываем event.code
-        // записываем event.code в коллекцию
-
-        document.addEventListener('keydown', function (event) {
+        function onKeydown(event) {
 
             collection.add(event.code);
 
-
-// alert(collection.size);
-//            for (let value of collection) alert(value);
-            // для проверки, значения записываются
-
-            // теперь как то надо написать условие, что если все нужные кнопки отжаты, то только тогда срабатывает func();
-            // if (event.code === 'KeyQ' && event.key === ('W' || 'w')) {    // херовое условие, не работает, надо как то по другому
-            // func();
-
-            if (event.repeat !== false) {
-                if (collection.has('KeyQ')) {
-                    if (collection.has('KeyW')) {
-                        func();
-                    }
+            if (collection.has(code1) === true) {
+                if (collection.has(code2) === true) {
+                    func();
+                    onKeyup();
                 }
             }
+            if (collection.has(code2) === true) {
+                if (collection.has(code1) === true) {
+                    func();
+                    onKeyup();
+                }
+            }
+        }
 
-        });
-
-        document.addEventListener('keyup', function (event) {
-
+        function onKeyup(event) {
             collection.clear();
-        });
+        }
     }
 
-
-    // вызов функции, который в итоге должен работать
     runOnKeys(
         () => alert("Привет!"),
         "KeyQ",
         "KeyW"
     );
 
-
-    // Событие keydown происходит при нажатии клавиши, а keyup – при отпускании.
-    // let div = document.getElementById('text');
-    // let resultDiv = document.createElement('div');
-    // document.body.append(resultDiv);
-
-
-    // function runOnKeys(func, code1, code2, ...code_n) {
-    //
-    //     document.addEventListener('keydown', function (event) {
-    //
-    //         if (event.code === 'KeyZ' || event.code === 'KeyX' || event.code === 'KeyC' || event.code === 'KeyV' || event.code === 'KeyB' ||
-    //             event.code === 'KeyN' || event.code === 'KeyM' || event.code === 'KeyA' || event.code === 'KeyS' || event.code === 'KeyD' ||
-    //             event.code === 'KeyF' || event.code === 'KeyG' || event.code === 'KeyH' || event.code === 'KeyJ' || event.code === 'KeyK' ||
-    //             event.code === 'KeyL' || event.code === 'KeyQ' || event.code === 'KeyW' || event.code === 'KeyE' || event.code === 'KeyR' ||
-    //             event.code === 'KeyT' || event.code === 'KeyY' || event.code === 'KeyU' || event.code === 'KeyI' || event.code === 'KeyO' ||
-    //             event.code === 'KeyP' || event.code === 'CtrlLeft' || event.code === 'ShiftLeft' || event.code === 'Caps' || event.code === 'Spase' ||
-    //             event.code === 'Enter') {
-    //
-    //             return text.innerHTML = `Вы нажали клавишу: ${event.key}`;
-    //         }
-    //     });
-    // }
-    // runOnKeys();
-
-    // выше, то как я поняла и решила задачу, ниже мое решение после подсказки.
-
-
-    // let set = new Set();
-    //создаем коллекцию set
-    // идея: в фунции keydown считывать нажимаемые клавиши и записывать их значение в set
-    // в keyup их удалять
-    // если все нужные клавиши нажаты - выводить результат, поставить временной интервал?
-
-
-    // не поняла пока, как это применить, поэтому ниже попытка сделать это через запись в массив
-
-    // let array = [];
-    // document.onkeydown = function (event) {
-    //
-    //     if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) {
-    //         alert ("нажали шифт или подобное");
-    //          if (event.repeat === true) {
-    //              alert ("попали в повторы"); // не попадаю в повторы....
-    //              console.log(array);
-    //              array.splice(-1, 1);
-    //              console.log(array);
-    //              array.push(event.key);
-    //              console.log(array);
-    //         }
-    //          else {
-    //              alert("одинарный шифт");
-    //              array.push(event.key);
-    //              console.log(array);
-    //         }
-    //     }
-    //         if (!event.repeat) {
-    //             if (event.code === 'Enter') {
-    //
-    //                 if (array.length - 1 > 1) {
-    //                     return resultDiv.innerHTML = `Вы нажали набор клавиш: ${array}`;
-    //                 } else {
-    //                     return resultDiv.innerHTML = `Вы нажали клавишу: ${event.key}`;
-    //                 }
-    //             }
-    //         }
-    // }
-    // document.onkeyup = function (event) {
-    //
-    // }
 </script>
 </body>
 </html>
