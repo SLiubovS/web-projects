@@ -15,9 +15,13 @@ function isVisible(elem) {
 function showVisible() {
     for (let img of document.querySelectorAll('img')) {
         let realSrc = img.dataset.src;
-        if (!realSrc) continue;
 
-        if (isVisible(img) === true) {
+        // проверяем что строка не пустая, а также не содержит null или undefined
+        if (!realSrc) {
+            continue;
+        }
+
+        if (isVisible(img)) {
 
             img.src = realSrc;
             img.dataset.src = '';
