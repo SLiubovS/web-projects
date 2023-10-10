@@ -10,9 +10,9 @@
 
 <script>
 
-    function runOnKeys(func, code1, code2, ...code_n) {
+    function runOnKeys(func, ...codes) {
 
-        let collection = new Set;
+        let collection = new Set();
 
         document.addEventListener('keydown', onKeydown);
         document.addEventListener('keyup', onKeyup);
@@ -21,17 +21,15 @@
 
             collection.add(event.code);
 
-            if (collection.has(code1) === true) {
-                if (collection.has(code2) === true) {
-                    func();
-                    onKeyup();
-                }
+            let hasCodes = true;
+
+            for (let code of codes) {
+                hasCodes &&= collection.has(code);
             }
-            if (collection.has(code2) === true) {
-                if (collection.has(code1) === true) {
-                    func();
-                    onKeyup();
-                }
+
+            if (hasCodes) {
+                func();
+                onKeyup();
             }
         }
 
