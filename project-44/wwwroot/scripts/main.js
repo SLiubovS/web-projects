@@ -8,54 +8,42 @@ let buttonStart = document.getElementById("buttonStart");
 
 let form = document.getElementById("prompt-form");
 let text = form.elements.text;
-let ok = form.elements.ok;
+let submitOk = form.elements.textOk;
 let cancel = form.elements.cancel;
 
 buttonStart.addEventListener("click", onClick);
+cancel.addEventListener("keydown", onKeydown);
+
+submitOk.addEventListener("click", clickSubmitOk);
+cancel.addEventListener("click", clickCancel);
+
 function onClick() {
     divFormContainer.hidden = false;
     text.focus();
+    document.body.style.overflow = "hidden";
+    divStart.style.overflow = "hidden";
+    document.body.style.backgroundColor = "#F0F0F0";
 }
-cancel.addEventListener("blur", onBlur);
-function onBlur() {
-    text.focus();
+
+function onKeydown(ev) {
+
+    if (ev.key === 'Tab') {
+        ev.preventDefault();
+        text.focus();
+    }
 }
-// cancel.onkeydown = function () {
-//     if (event.key === 'Tab') {
-//         onKeyUp();
-//     }
-// }
-cancel.addEventListener("click", onClick);
-// cancel.addEventListener("keyup", onKeyUp);
-// function onKeyUp() {
-//     if (event.key === 'Tab') {
-//         text.focus();
-//     }
-// }
-    // window.onkeydown = function (event) {
-    //
-    //     if(event.key === 'Tab') {
-    //         if ()
-    //         event.preventDefault();
-    //     }
 
-        // if (event.key === 'Tab') {
-        //
-        //     event.preventDefault();
+function clickSubmitOk(e) {
+    if (!text.value) {
+        e.preventDefault();
+    } else {
+        alert(`Вы ввели: ${text.value}`);
+    }
+}
 
-        // }
-
-
-
-
-// вешаем обработчик событий на кнопку, при клике на кнопку форма див с кнопкой должна пропадать, на ее месте должна появиться форма с вопросом и ок или отмена
-
-// далее при
-
-// Требования:
-//
-//     Форма должна быть в центре окна.
-//     Форма является модальным окном, это значит, что никакое взаимодействие с остальной частью страницы невозможно, пока пользователь не закроет его.
-//     При показе формы, фокус должен находиться сразу внутри <input>.//посмотреть про таб индекс и я индекс -
-// на инпут повесить change обработчик?
-// Клавиши Tab/Shift+Tab должны переключать фокус между полями формы, не позволяя ему переходить к другим элементам страницы.
+function clickCancel() {
+    alert(`Вы ввели: null`);
+    divFormContainer.hidden = true;
+    document.body.style.overflow = "visible";
+    document.body.style.backgroundColor = "white";
+}
