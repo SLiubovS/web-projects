@@ -13,17 +13,28 @@
 
     document.body.style.height = '1000px';
 
-    document.addEventListener('scroll', function (event) {
+        document.addEventListener('scroll', function (event) {
+            divShow ();
+            divShow ();
+            divShow ();
+            divShow ();
+            divShow ();
+        });
 
-        if ((window.innerHeight - 100) ) {
+        function divShow () {
             let div = document.createElement('div');
             div.innerHTML = `Date: ${date}`;
             document.body.append(div);
-            let h = document.documentElement.clientHeight + 100 + 'px';
         }
-        // ширина всего документа - 100 px - если есть место в документе до этой величины, то создать див..?
 
-    });
+    //     if ((window.innerHeight - 100) ) {
+    //         let div = document.createElement('div');
+    //         div.innerHTML = `Date: ${date}`;
+    //         document.body.append(div);
+    //     }
+    //
+    //
+    // });
 
 </script>
 </body>
