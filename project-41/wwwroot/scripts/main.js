@@ -19,6 +19,7 @@ function tableClick(event) { // вешаем обработчик событий
         let win = document.getElementById("selected");
         if (win === null) {
             let textarea = document.createElement("textarea");
+
             textarea.classList = td.classList;
             textarea.id = "selected";
             td.before(textarea);
@@ -34,6 +35,7 @@ function tableClick(event) { // вешаем обработчик событий
             ok.addEventListener("click", clickButtonOk);
             cancel.addEventListener("click", clickButton);
             cancel.addEventListener("click", clickButtonCancel);
+            textarea.focus();
         }
     }
 
