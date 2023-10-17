@@ -1,35 +1,6 @@
-let num = 1;
+import { min } from './math.js';
 
-function changeNum(arg) {
-    arg = 5;
-    return arg;
-}
+let result = min(5, 6);
 
-let numNew = changeNum(num);
+console.log(result);
 
-console.log(numNew);
-
-//
-
-
-
-let obj = {
-    num: 1
-};
-
-function changeObj(arg) {
-    arg = {num: 5};
-}
-
-changeObj(obj);
-
-console.log(obj.num);
-
-
-function changeObj2(arg) {
-    arg.num = 5;
-}
-
-changeObj2(obj);
-
-console.log(obj.num);

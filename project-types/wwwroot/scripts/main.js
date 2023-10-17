@@ -45,3 +45,9 @@ console.log(id2.description);
 let bool = true;
 
 console.log(typeof bool);
+
+
+
+let arr = [1,5,4,7,6];
+
+console.log(typeof arr);
