@@ -1,0 +1,21 @@
+div {
+    box-sizing: border-box;
+    text-align: center;
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    width: 90%;
+}
+
+
+
+#but {
+    vertical-align: middle;
+    font-size: 70px;
+    background-color: #0099ff;
+    border: 5px solid lightpink;
+    border-radius: 15px;
+    color: lightpink;
+    box-shadow: 5px 5px 5px #333333;
+}
