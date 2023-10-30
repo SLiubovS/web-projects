@@ -52,18 +52,18 @@
     document.body.getBoundingClientRect();
     arrowTop.hidden = true;
 
-
+    arrowTop.onmousedown = function (event) {
+        document.documentElement.scrollTop = 0; // прокрутка документа равна 0, т.е. ее координата топ 0
+    }
     // попробовать переписать задачу через scrollTo / scrollBy
     function onScroll(ev) {
 
         if (window.scrollY > document.documentElement.clientHeight) { // если прокрутка в пикселях больше высоты окна браузера, то
             arrowTop.hidden = false;
 
-            arrowTop.onmousedown = function (event) {
-                document.documentElement.scrollTop = 0; // прокрутка документа равна 0, т.е. ее координата топ 0
-            }
+
         }
-        if (ev.scrollY < document.documentElement.clientHeight) { // если прокрутка в пикселях больше высоты окна браузера, то
+        if (window.scrollY < document.documentElement.clientHeight) { // если прокрутка в пикселях больше высоты окна браузера, то
             arrowTop.hidden = true;
         }
     }
