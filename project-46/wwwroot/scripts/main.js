@@ -102,3 +102,36 @@ function popUpLoad(event) {
     // // event.close();
     // alert(event.closed); // true
 }
+
+
+
+let regexp = /\b\d\d:\d\d\b/g;
+
+    let str = "Завтрак в 09:00 или в 10:00 в комнате 123:456";
+
+   // alert(str.match(regexp));
+
+// alert( "Вуля Валя Вуаль".match(/В[уа]ля/gi) ); // null, нет совпадений
+// ищет "В", затем [у или а], потом "ля"
+// а в строке В, потом у, потом а
+
+
+
+let regexp3 = /[\p{Alpha}\p{M}\p{Nd}\p{Pc}\p{Join_C}]/gu;
+
+let str3 = `Hi меня зовут Любовь, моя почта: 4815162342@gmail.com`;
+
+// найдены все буквы и цифры
+// alert( str3.match(regexp3) ); // H,i,你,好,1,2
+
+// alert( "Java".match(/Java[^script]/) );
+
+// alert( "JavaScript".match(/Java[^script]/) );
+
+// alert( "Javascript".match(/Java[^script]/) );
+
+// alert( "Javascript".match(/Java[^script]/) );
+
+
+let regexp4 = /\d\d[:-]\d\d/g;
+alert( "Завтрак в 09:00. Ужин в 21-30".match(regexp4) ); // 09:00, 21-30
