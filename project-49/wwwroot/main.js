@@ -1,6 +1,10 @@
 let url = "http://localhost:5000/api/Users";
+let newUrl = "http://localhost:5000/api/Users/";
 
 let tbodyHead = document.getElementById("tbodyHead");
+
+
+// раздел добавление пользователя
 
 let response = await fetch(url, {
     method: 'GET',
@@ -22,16 +26,110 @@ if (response.ok) { // если HTTP-статус в диапазоне 200-299
     alert("Ошибка HTTP: " + response.status);
 }
 
-// найти кнопку
-// считать данные из input
-
 let addButton = document.getElementById("addButton");
 let firstName = document.getElementById("firstName");
 let lastName = document.getElementById("lastName");
 
 addButton.addEventListener("click", addUser);
 
-async function addUser() {
+
+
+// раздел удаление пользователя
+
+let buttonsDelete = document.getElementsByClassName('buttonDelete');
+
+for (let button of buttonsDelete) {
+
+    button.addEventListener("click", async function () {
+
+        let parent = button.closest(".tr-delete");
+
+        let chaildId = parent.firstElementChild.textContent;
+
+        let regexp = /(^([0-9a-z]{8})-([0-9a-z]{4})-([0-9a-z]{4})-([0-9a-z]{4})-([0-9a-z]{12})$)/gui;
+
+        if (chaildId.match(regexp) == null) return;
+
+        url = newUrl + chaildId;
+
+        let response = await fetch(url, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+        });
+
+        if (response.ok) {
+            parent.remove();
+            location.replace(document.URL);
+        } else {
+            alert(`Ошибка HTTP: ${response.status} Пользователь с id ${chaildId} не найден`);
+        }
+    });
+}
+
+
+
+
+
+// раздел изменение пользователя
+
+// находим все кнопки редактирования
+let buttonEditing = document.getElementsByClassName('buttonEditing');
+
+for (let buttonEd of buttonEditing) {
+
+    buttonEd.addEventListener("click", async function () {
+
+
+        // нашли строку, в которой нажата кнопка
+        let parentEd = buttonEd.closest(".tr-editing");
+
+        // нужно найти поля ввода фамилия / имя данной строки и сделать их доступными для изменения
+        let childFirstName = parentEd.querySelector(".table-td-firstName");
+        let childLastName = parentEd.querySelector(".table-td-lastName");
+
+        // ищем 1 ребенка это id, нужен для чтения
+        let firstChildID = parentEd.firstElementChild.textContent; // id
+
+        let urlEditing = newUrl + firstChildID;
+
+        if (childFirstName.disabled === true || childLastName.disabled === true) {
+
+                    childFirstName.disabled = false;
+                    childLastName.disabled = false;
+
+                    if ( (childFirstName.textContent == null || "") || (childLastName.textContent == null || "") ) return;
+        }
+        else {
+
+            childFirstName.disabled = true;
+            childLastName.disabled = true;
+
+                    let response = await fetch(urlEditing, {
+                        method: 'PUT',
+                        body: JSON.stringify({
+                        "firstName": `${childFirstName.value}`,
+                        "lastName": `${childLastName.value}`
+                        }),
+                        headers: {
+                            "Content-type": "application/json; charset=UTF-8"
+                        }
+                    });
+                    if (response.ok) {
+                       // enumerationUsers(array);
+                    }
+                    else {
+                        alert("Ошибка HTTP: " + response.status);
+                    }
+            location.replace(document.URL);
+        }
+    });
+}
+
+// вынесла используемые ф-ии в конец
+
+async function addUser() { // ф-ия для добавления 1 нового пользователя
 
     firstName.textContent = firstName.value;
     lastName.textContent = lastName.value;
@@ -53,129 +151,10 @@ async function addUser() {
         },
         body: JSON.stringify(user)
     });
-    location.replace(document.URL);
-
-    //    if (response.ok) {
-    //        let text = await response.text();
-    //        let array = JSON.parse(text);
-    //        enumerationUsers(array);
-    //    }
-    // else {
-    //        alert("Ошибка HTTP: " + response.status);
-    //    }
-
-    // сделать также, как с get, и получевш. пользователя добавить строкой к таблице
-
-//     if (response.ok) { // если HTTP-статус в диапазоне 200-299
-//         // получаем тело ответа в виде текста
-//         let text = await response.text();
-// //преобразовали текст в массив с объектами внутри
-//         let array = JSON.parse(text);
-//
-//         // получили массив объектов, где 1 объект это отдельный пользователь с полями id, lastName, firstName
-//
-//
-//
-//         enumerationUsers(array);
-//
-//     } else {
-//         alert("Ошибка HTTP: " + response.status);
-//     }
+    location.replace(document.URL); // обновление текущей страницы
 }
 
-
-// раздел удаление пользователя
-
-// чтобы удалить данные, нужно в строку адреса добавить в конец /id,
-// после чего отправить данные на сервер и получить ответ
-
-// let inputDelete = document.getElementById("inputDelete");
-// let deleteButton = document.getElementById("deleteButton");
-
-//deleteButton.addEventListener("click", deleteUser);
-
-let buttonsDelete = document.getElementsByClassName('buttonDelete');
-
-for (let button of buttonsDelete) {
-
-    button.addEventListener("click", async function () {
-
-// async function deleteUser() {
-
-        let parent = button.closest(".tr-delete");
-
-        let chaildId = parent.firstElementChild.textContent;
-
-        // alert(chaildId);
-        // alert(typeof (chaildId));
-
-        // inputDelete.textContent = inputDelete.value;
-
-        let regexp = /(^([0-9a-z]{8})-([0-9a-z]{4})-([0-9a-z]{4})-([0-9a-z]{4})-([0-9a-z]{12})$)/gui;
-
-        // if (inputDelete.textContent.match(regexp) == null) return;
-
-        if (chaildId.match(regexp) == null) return;
-
-        let newUrl = "http://localhost:5000/api/Users/";
-
-        // url = newUrl + inputDelete.textContent;
-        url = newUrl + chaildId;
-
-        let response = await fetch(url, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-            },
-        });
-
-        if (response.ok) {
-            parent.remove();
-            location.replace(document.URL);
-        } else {
-            // alert(`Ошибка HTTP: ${response.status} Пользователь с id ${inputDelete.textContent} не найден`);
-            alert(`Ошибка HTTP: ${response.status} Пользователь с id ${chaildId} не найден`);
-        }
-        // });
-        // }
-    });
-}
-
-
-
-
-
-// раздел изменение пользователя
-
-// чтобы изменить данные сущ. пользователя, нужно
-// после нажатия на кнопку, чтобы поля input фамилия и имя стали доступные для ввода,
-// считалось новое значение введенное (не пустое)
-// далее при повторном нажатии на кнопку новые данные отправились на сервер и данные изменились
-
-// находим все кнопки редактирования
-let buttonEditing = document.getElementsByClassName('buttonEditing');
-
-for (let buttonEd of buttonEditing) {
-
-    buttonEd.addEventListener("click", async function () {
-
-        let parentEd = buttonEd.closest(".tr-editing");
-
-        let chaildEd = parentEd.firstElementChild.textContent;
-
-
-    });
-}
-
-
-
-
-
-
-
-
-// вынесла используемую ф-ию в конец
-function enumerationUsers(array) {
+function enumerationUsers(array) { // ф-ия для получения всех пользователей
     // alert(json.length); // определили длину массива, 1, значить внутри 1 пользователь (объект) с полями id, lastName, firstName
 
     // alert(array.length); // 2, значит индекс 0 - первый пользователь, индекс 1 второй пользователь
@@ -195,8 +174,18 @@ function enumerationUsers(array) {
         let td5 = document.createElement("td");
 
         td1.textContent = array[index].id;
-        td2.textContent = array[index].firstName;
-        td3.textContent = array[index].lastName;
+
+        let tdFistName = document.createElement("input");
+        tdFistName.className = "input table-td-firstName";
+        tdFistName.value = array[index].firstName;
+        tdFistName.disabled = true;
+        td2.append(tdFistName);
+
+        let tdLastName = document.createElement("input");
+        tdLastName.className = "input table-td-lastName";
+        tdLastName.value = array[index].lastName;
+        tdLastName.disabled = true;
+        td3.append(tdLastName);
 
         td1.className = "table-td";
         td2.className = "table-td";
@@ -206,7 +195,6 @@ function enumerationUsers(array) {
         td2.style.padding = "0 10px";
         td3.style.padding = "0 10px";
         td4.style.padding = "0 10px";
-        td5.style.padding = "0 10px";
 
         td4.className = 'table-icon';
         td5.className = 'table-icon';

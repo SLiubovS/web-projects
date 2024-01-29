@@ -12,11 +12,14 @@ body {
 
 .addButton {
     margin-left: 10px;
+    width: 46px;
+    height: 36px;
 }
 
 .input {
     font-size: 30px;
     border: 0;
+    color: black;
 }
 
 .input:focus {
