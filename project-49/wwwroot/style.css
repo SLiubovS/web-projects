@@ -1,0 +1,51 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 30px;
+}
+
+.div1 {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px;
+}
+
+.addButton {
+    margin-left: 10px;
+}
+
+.input {
+    font-size: 30px;
+    border: 0;
+}
+
+.input:focus {
+    outline: 0;
+}
+
+.inputDelete {
+    width: 580px;
+}
+
+.table {
+    margin: 10px;
+    padding: 10px;
+
+}
+
+.table-th {
+    margin: 0 100px;
+    padding: 0 100px;
+    background-color: bisque;
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+}
+
+.table-th,
+.table-td {
+    border: 1px solid black;
+}
+
