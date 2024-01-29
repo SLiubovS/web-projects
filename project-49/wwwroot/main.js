@@ -61,7 +61,6 @@ for (let button of buttonsDelete) {
 
         if (response.ok) {
             parent.remove();
-            location.replace(document.URL);
         } else {
             alert(`Ошибка HTTP: ${response.status} Пользователь с id ${chaildId} не найден`);
         }
@@ -109,20 +108,24 @@ for (let buttonEd of buttonEditing) {
                     let response = await fetch(urlEditing, {
                         method: 'PUT',
                         body: JSON.stringify({
-                        "firstName": `${childFirstName.value}`,
-                        "lastName": `${childLastName.value}`
+                        firstName: childFirstName.value,
+                        lastName: childLastName.value
                         }),
                         headers: {
                             "Content-type": "application/json; charset=UTF-8"
                         }
                     });
                     if (response.ok) {
-                       // enumerationUsers(array);
+
+                        let text = await response.text();
+                        let updatedUser = JSON.parse(text);
+
+                        childFirstName.value = updatedUser.firstName;
+                        childLastName.value = updatedUser.lastName;
                     }
                     else {
                         alert("Ошибка HTTP: " + response.status);
                     }
-            location.replace(document.URL);
         }
     });
 }
