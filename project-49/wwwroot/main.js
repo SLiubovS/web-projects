@@ -44,13 +44,13 @@ for (let button of buttonsDelete) {
 
         let parent = button.closest(".tr-delete");
 
-        let chaildId = parent.firstElementChild.textContent;
+        let childId = parent.firstElementChild.textContent;
 
         let regexp = /(^([0-9a-z]{8})-([0-9a-z]{4})-([0-9a-z]{4})-([0-9a-z]{4})-([0-9a-z]{12})$)/gui;
 
-        if (chaildId.match(regexp) == null) return;
+        if (childId.match(regexp) == null) return;
 
-        url = newUrl + chaildId;
+        url = newUrl + childId;
 
         let response = await fetch(url, {
             method: 'DELETE',
@@ -62,7 +62,7 @@ for (let button of buttonsDelete) {
         if (response.ok) {
             parent.remove();
         } else {
-            alert(`Ошибка HTTP: ${response.status} Пользователь с id ${chaildId} не найден`);
+            alert(`Ошибка HTTP: ${response.status} Пользователь с id ${childId} не найден`);
         }
     });
 }
@@ -154,69 +154,141 @@ async function addUser() { // ф-ия для добавления 1 нового
         },
         body: JSON.stringify(user)
     });
-    location.replace(document.URL); // обновление текущей страницы
-}
 
-function enumerationUsers(array) { // ф-ия для получения всех пользователей
-    // alert(json.length); // определили длину массива, 1, значить внутри 1 пользователь (объект) с полями id, lastName, firstName
+    if (response.ok) {
 
-    // alert(array.length); // 2, значит индекс 0 - первый пользователь, индекс 1 второй пользователь
-    //далее нужно под каждого пользователя сделать строку в index.html
+         let obj = await response.text();
+         let newUser = JSON.parse(obj);
 
-    // нашли таблицу, в конец таблицы добавляем новую строку под каждого пользователя
+        createString(newUser.id, newUser.firstName, newUser.lastName);
 
-    for (let index = 0; index <= array.length - 1; index++) {
-
-        let tr = document.createElement("tr"); // создали новую строку
-        tr.className = "tr-delete tr-editing";
-
-        let td1 = document.createElement("td"); // создали новые поля строки
-        let td2 = document.createElement("td"); // создали новые поля строки
-        let td3 = document.createElement("td"); // создали новые поля строки
-        let td4 = document.createElement("td");
-        let td5 = document.createElement("td");
-
-        td1.textContent = array[index].id;
-
-        let tdFistName = document.createElement("input");
-        tdFistName.className = "input table-td-firstName";
-        tdFistName.value = array[index].firstName;
-        tdFistName.disabled = true;
-        td2.append(tdFistName);
-
-        let tdLastName = document.createElement("input");
-        tdLastName.className = "input table-td-lastName";
-        tdLastName.value = array[index].lastName;
-        tdLastName.disabled = true;
-        td3.append(tdLastName);
-
-        td1.className = "table-td";
-        td2.className = "table-td";
-        td3.className = "table-td";
-
-        td1.style.padding = "0 10px";
-        td2.style.padding = "0 10px";
-        td3.style.padding = "0 10px";
-        td4.style.padding = "0 10px";
-
-        td4.className = 'table-icon';
-        td5.className = 'table-icon';
-
-        td4.insertAdjacentHTML("afterbegin", `<button class="button buttonEditing">
-<img class="icon editing-icon" src="icon/editing-icon.png" alt="Редактировать"></button>`);
-        td5.insertAdjacentHTML("afterbegin", `<button class="button buttonDelete">
-<img class="icon delete-icon" src="icon/delete-icon.png" alt="Удалить"></button>`);
-
-        tr.append(td1);
-        tr.append(td2);
-        tr.append(td3);
-        tr.append(td4);
-        tr.append(td5);
-
-        tbodyHead.append(tr);
+        firstName.value = '';
+        lastName.value = '';
+    }
+    else {
+        alert(`Ошибка HTTP: ${response.status}`);
     }
 }
 
+// function enumerationUsers(array) { // ф-ия для получения всех пользователей
+//     // alert(json.length); // определили длину массива, 1, значить внутри 1 пользователь (объект) с полями id, lastName, firstName
+//
+//     // alert(array.length); // 2, значит индекс 0 - первый пользователь, индекс 1 второй пользователь
+//     //далее нужно под каждого пользователя сделать строку в index.html
+//
+//     // нашли таблицу, в конец таблицы добавляем новую строку под каждого пользователя
+//
+//     for (let index = 0; index <= array.length - 1; index++) {
+//
+//         let tr = document.createElement("tr"); // создали новую строку
+//         tr.className = "tr-delete tr-editing";
+//
+//         let td1 = document.createElement("td"); // создали новые поля строки
+//         let td2 = document.createElement("td"); // создали новые поля строки
+//         let td3 = document.createElement("td"); // создали новые поля строки
+//         let td4 = document.createElement("td");
+//         let td5 = document.createElement("td");
+//
+//         td1.textContent = array[index].id;
+//
+//         let tdFirstName = document.createElement("input");
+//         tdFirstName.className = "input table-td-firstName";
+//         tdFirstName.value = array[index].firstName;
+//         tdFirstName.disabled = true;
+//         td2.append(tdFirstName);
+//
+//         let tdLastName = document.createElement("input");
+//         tdLastName.className = "input table-td-lastName";
+//         tdLastName.value = array[index].lastName;
+//         tdLastName.disabled = true;
+//         td3.append(tdLastName);
+//
+//         td1.className = "table-td";
+//         td2.className = "table-td";
+//         td3.className = "table-td";
+//
+//         td1.style.padding = "0 10px";
+//         td2.style.padding = "0 10px";
+//         td3.style.padding = "0 10px";
+//         td4.style.padding = "0 10px";
+//
+//         td4.className = 'table-icon';
+//         td5.className = 'table-icon';
+//
+//         td4.insertAdjacentHTML("afterbegin", `<button class="button buttonEditing">
+// <img class="icon editing-icon" src="icon/editing-icon.png" alt="Редактировать"></button>`);
+//         td5.insertAdjacentHTML("afterbegin", `<button class="button buttonDelete">
+// <img class="icon delete-icon" src="icon/delete-icon.png" alt="Удалить"></button>`);
+//
+//         tr.append(td1);
+//         tr.append(td2);
+//         tr.append(td3);
+//         tr.append(td4);
+//         tr.append(td5);
+//
+//         tbodyHead.append(tr);
+//     }
+// }
 
+
+
+function createString(id, firstName, lastName) {
+
+    let tr = document.createElement("tr"); // создали новую строку
+    tr.className = "tr-delete tr-editing";
+
+    let td1 = document.createElement("td"); // создали новые поля строки
+    let td2 = document.createElement("td"); // создали новые поля строки
+    let td3 = document.createElement("td"); // создали новые поля строки
+    let td4 = document.createElement("td");
+    let td5 = document.createElement("td");
+
+    let tdFirstName = document.createElement("input");
+    tdFirstName.className = "input table-td-firstName";
+    tdFirstName.disabled = true;
+    td2.append(tdFirstName);
+
+    let tdLastName = document.createElement("input");
+    tdLastName.className = "input table-td-lastName";
+    tdLastName.disabled = true;
+    td3.append(tdLastName);
+
+    td1.className = "table-td table-td-id";
+    td2.className = "table-td";
+    td3.className = "table-td";
+
+    td1.style.padding = "0 10px";
+    td2.style.padding = "0 10px";
+    td3.style.padding = "0 10px";
+    td4.style.padding = "0 10px";
+
+    td4.className = 'table-icon';
+    td5.className = 'table-icon';
+
+    td4.insertAdjacentHTML("afterbegin", `<button class="button buttonEditing">
+<img class="icon editing-icon" src="icon/editing-icon.png" alt="Редактировать"></button>`);
+    td5.insertAdjacentHTML("afterbegin", `<button class="button buttonDelete">
+<img class="icon delete-icon" src="icon/delete-icon.png" alt="Удалить"></button>`);
+
+    td1.textContent = id;
+    tdFirstName.value = firstName;
+    tdLastName.value = lastName;
+
+    tr.append(td1);
+    tr.append(td2);
+    tr.append(td3);
+    tr.append(td4);
+    tr.append(td5);
+
+    tbodyHead.append(tr);
+}
+
+function enumerationUsers(array) { // ф-ия для получения всех пользователей
+
+    for (let index = 0; index <= array.length - 1; index++) {
+
+     createString(array[index].id, array[index].firstName, array[index].lastName);
+    }
+}
 
 // положить данную инфу (методы) в gitHub
