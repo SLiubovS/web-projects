@@ -2,94 +2,28 @@ let url = "http://localhost:5000/api/Users";
 let newUrl = "http://localhost:5000/api/Users/";
 
 let tbodyHead = document.getElementById("tbodyHead");
-
-
-// раздел добавление пользователя
-
-function createDeleteButtons() {
-
-    // раздел удаление пользователя
-
-    let buttonsDelete = document.getElementsByClassName('buttonDelete');
-
-    for (let button of buttonsDelete) {
-
-        button.addEventListener("click",function () {
-
-            let parent = button.closest(".tr-delete");
-
-            let childId = parent.firstElementChild.textContent;
-
-            let regexp = /(^([0-9a-z]{8})-([0-9a-z]{4})-([0-9a-z]{4})-([0-9a-z]{4})-([0-9a-z]{12})$)/gui;
-
-            if (childId.match(regexp) == null) return;
-
-            url = newUrl + childId;
-
-            fetch(url, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json;charset=utf-8'
-                },
-            }).then(response => {
-
-                if (response.ok) {
-                    parent.remove();
-                } else {
-                    alert(`Ошибка HTTP: ${response.status} Пользователь с id ${childId} не найден`);
-                }
-            });
-        });
-    }
-}
-
-fetch(url, {
-    method: 'GET',
-    headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-    },
-})
-    .then(response => {
-        if (response.ok) {
-
-            // функциональный стиль программирования
-            // когда результат 1 функции передается следующей вниз по цепочке
-
-            response
-                .text()
-                .then(text => JSON.parse(text)) // text => JSON.parse(text) или (тоже самое) : function(text) { return JSON.parse(text); }
-                .then(enumerationUsers)
-                .then(createDeleteButtons);
-
-        } else {
-            alert("Ошибка HTTP: " + response.status);
-        }
-    });
-
 let addButton = document.getElementById("addButton");
 let firstName = document.getElementById("firstName");
 let lastName = document.getElementById("lastName");
 
 addButton.addEventListener("click", addUser);
 
-
-
-
-
-
-
 // раздел изменение пользователя
+function createEditingButtons() {
 
-// находим все кнопки редактирования
-let buttonEditing = document.getElementsByClassName('buttonEditing');
+// находим все кнопки редактирования (используется в методе GET)
+    let buttonEditing = document.getElementsByClassName('buttonEditing');
 
-for (let buttonEd of buttonEditing) {
-
-    buttonEd.addEventListener("click",function () {
+    for (let buttonEd of buttonEditing) {
+        buttonEd.addEventListener("click", buttonEditingClick);
+    }
+}
+// отделила ф-ию редактирования одной кнопки, навешиваю ее сразу при создании строки
+    function buttonEditingClick () {
 
 
         // нашли строку, в которой нажата кнопка
-        let parentEd = buttonEd.closest(".tr-editing");
+        let parentEd = this.closest(".tr-editing");
 
         // нужно найти поля ввода фамилия / имя данной строки и сделать их доступными для изменения
         let childFirstName = parentEd.querySelector(".table-td-firstName");
@@ -136,12 +70,79 @@ for (let buttonEd of buttonEditing) {
                 }
             });
         }
-    });
+    }
+
+
+// раздел удаление пользователя
+
+// находим все кнопки удаления (используется в методе GET)
+function createDeleteButtons() {
+
+    let buttonsDelete = document.getElementsByClassName('buttonDelete');
+
+    for (let button of buttonsDelete) {
+        button.addEventListener("click", buttonDeleteClick);
+    }
 }
+
+// отделила ф-ию удаления одной кнопки, навешиваю ее сразу при создании строки
+        function buttonDeleteClick() {
+
+            let parent = this.closest(".tr-delete");
+
+            let childId = parent.firstElementChild.textContent;
+
+            let regexp = /(^([0-9a-z]{8})-([0-9a-z]{4})-([0-9a-z]{4})-([0-9a-z]{4})-([0-9a-z]{12})$)/gui;
+
+            if (childId.match(regexp) == null) return;
+
+            let deleteUrl = newUrl + childId;
+
+            fetch(deleteUrl, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+            }).then(response => {
+
+                if (response.ok) {
+                    parent.remove();
+                } else {
+                    alert(`Ошибка HTTP: ${response.status} Пользователь с id ${childId} не найден`);
+                }
+            });
+        }
+
+// раздел получение списка всех пользователей
+fetch(url, {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+    },
+})
+    .then(response => {
+        if (response.ok) {
+
+            // функциональный стиль программирования
+            // когда результат 1 функции передается следующей вниз по цепочке
+
+            response
+                .text()
+                .then(text => JSON.parse(text)) // text => JSON.parse(text) или (тоже самое) : function(text) { return JSON.parse(text); }
+                .then(enumerationUsers)
+                .then(createDeleteButtons)
+                .then(createEditingButtons);
+
+        } else {
+            alert("Ошибка HTTP: " + response.status);
+        }
+    });
+
 
 // вынесла используемые ф-ии в конец
 
 function addUser() { // ф-ия для добавления 1 нового пользователя
+    url = "http://localhost:5000/api/Users";
 
     firstName.textContent = firstName.value;
     lastName.textContent = lastName.value;
@@ -155,6 +156,8 @@ function addUser() { // ф-ия для добавления 1 нового по�
         firstName: firstName.textContent,
         lastName: lastName.textContent
     };
+
+    // создание пользователя
 
     fetch(url, {
         method: 'POST',
@@ -174,7 +177,6 @@ function addUser() { // ф-ия для добавления 1 нового по�
 
                         firstName.value = '';
                         lastName.value = '';
-
                     });
         } else {
             alert(`Ошибка HTTP: ${response.status}`);
@@ -215,10 +217,36 @@ function createString(id, firstName, lastName) {
     td4.className = 'table-icon';
     td5.className = 'table-icon';
 
-    td4.insertAdjacentHTML("afterbegin", `<button class="button buttonEditing">
-<img class="icon editing-icon" src="icon/editing-icon.png" alt="Редактировать"></button>`);
-    td5.insertAdjacentHTML("afterbegin", `<button class="button buttonDelete">
-<img class="icon delete-icon" src="icon/delete-icon.png" alt="Удалить"></button>`);
+//     td4.insertAdjacentHTML("afterbegin", `<button class="button buttonEditing">
+// <img class="icon editing-icon" src="icon/editing-icon.png" alt="Редактировать"></button>`);
+//     td5.insertAdjacentHTML("afterbegin", `<button class="button buttonDelete">
+// <img class="icon delete-icon" src="icon/delete-icon.png" alt="Удалить"></button>`);
+
+    let buttonEditing = document.createElement("button");
+    buttonEditing.className = "button buttonEditing";
+    td4.append(buttonEditing);
+
+    let imgEditing = document.createElement("img");
+    imgEditing.className = "icon editing-icon";
+    imgEditing.src = "icon/editing-icon.png";
+    imgEditing.alt = "Редактировать";
+
+    buttonEditing.append(imgEditing);
+    buttonEditing.addEventListener("click", buttonEditingClick);
+
+
+    let buttonDelete = document.createElement("button");
+    buttonDelete.className = "button buttonDelete";
+    td5.append(buttonDelete);
+
+    let imgDelete = document.createElement("img");
+    imgDelete.className = "icon delete-icon";
+    imgDelete.src = "icon/delete-icon.png";
+    imgDelete.alt = "Удалить";
+
+    buttonDelete.append(imgDelete);
+    buttonDelete.addEventListener("click", buttonDeleteClick);
+
 
     td1.textContent = id;
     tdFirstName.value = firstName;
@@ -241,4 +269,3 @@ function enumerationUsers(array) { // ф-ия для получения всех
     }
 }
 
-// положить данную инфу (методы) в gitHub
