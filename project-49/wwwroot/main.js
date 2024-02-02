@@ -4,7 +4,7 @@ let newUrl = "http://localhost:5000/api/Users/";
 let tbodyHead = document.getElementById("tbodyHead");
 
 
-// раздел добавление пользователя
+// раздел получения всех пользователей
 
 let response = await fetch(url, {
     method: 'GET',
@@ -21,8 +21,8 @@ if (response.ok) { // если HTTP-статус в диапазоне 200-299
     let array = JSON.parse(text);
 
     enumerationUsers(array);
-    ButtonsDelete();
-    ButtonsEditing();
+    createDeleteButtons();
+    createEditingButtons();
 
 } else {
     alert("Ошибка HTTP: " + response.status);
@@ -38,15 +38,17 @@ addButton.addEventListener("click", addUser);
 
 // раздел удаление пользователя
 
-async function ButtonsDelete() {
+async function createDeleteButtons() {
 
     let buttonsDelete = document.getElementsByClassName('buttonDelete');
 
     for (let button of buttonsDelete) {
-
-        button.addEventListener("click", async function () {
-
-            let parent = button.closest(".tr-delete");
+        button.addEventListener("click", buttonDeleteClick);
+    }
+}
+// отделила ф-ию удаления одной кнопки, навешиваю ее сразу при создании строки
+async function buttonDeleteClick() {
+            let parent = this.closest(".tr-delete");
 
             let childId = parent.firstElementChild.textContent;
 
@@ -54,9 +56,9 @@ async function ButtonsDelete() {
 
             if (childId.match(regexp) == null) return;
 
-            url = newUrl + childId;
+            let urlDelete = newUrl + childId;
 
-            let response = await fetch(url, {
+            let response = await fetch(urlDelete, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
@@ -68,27 +70,22 @@ async function ButtonsDelete() {
             } else {
                 alert(`Ошибка HTTP: ${response.status} Пользователь с id ${childId} не найден`);
             }
-        });
-    }
-}
-
-
-
+        }
 
 // раздел изменение пользователя
+function createEditingButtons() {
 
-async function ButtonsEditing() {
-
-// находим все кнопки редактирования
+// находим все кнопки редактирования (используется в методе GET)
     let buttonEditing = document.getElementsByClassName('buttonEditing');
 
     for (let buttonEd of buttonEditing) {
-
-        buttonEd.addEventListener("click", async function () {
-
-
+        buttonEd.addEventListener("click", buttonEditingClick);
+    }
+}
+// отделила ф-ию редактирования одной кнопки, навешиваю ее сразу при создании строки
+async function buttonEditingClick () {
             // нашли строку, в которой нажата кнопка
-            let parentEd = buttonEd.closest(".tr-editing");
+            let parentEd = this.closest(".tr-editing");
 
             // нужно найти поля ввода фамилия / имя данной строки и сделать их доступными для изменения
             let childFirstName = parentEd.querySelector(".table-td-firstName");
@@ -131,9 +128,7 @@ async function ButtonsEditing() {
                     alert("Ошибка HTTP: " + response.status);
                 }
             }
-        });
-    }
-}
+        }
 
 // ф-ия для добавления 1 нового пользователя
 
@@ -210,10 +205,35 @@ function createString(id, firstName, lastName) {
     td4.className = 'table-icon';
     td5.className = 'table-icon';
 
-    td4.insertAdjacentHTML("afterbegin", `<button class="button buttonEditing">
-<img class="icon editing-icon" src="icon/editing-icon.png" alt="Редактировать"></button>`);
-    td5.insertAdjacentHTML("afterbegin", `<button class="button buttonDelete">
-<img class="icon delete-icon" src="icon/delete-icon.png" alt="Удалить"></button>`);
+//     td4.insertAdjacentHTML("afterbegin", `<button class="button buttonEditing">
+// <img class="icon editing-icon" src="icon/editing-icon.png" alt="Редактировать"></button>`);
+//     td5.insertAdjacentHTML("afterbegin", `<button class="button buttonDelete">
+// <img class="icon delete-icon" src="icon/delete-icon.png" alt="Удалить"></button>`);
+
+    let buttonEditing = document.createElement("button");
+    buttonEditing.className = "button buttonEditing";
+    td4.append(buttonEditing);
+
+    let imgEditing = document.createElement("img");
+    imgEditing.className = "icon editing-icon";
+    imgEditing.src = "icon/editing-icon.png";
+    imgEditing.alt = "Редактировать";
+
+    buttonEditing.append(imgEditing);
+    buttonEditing.addEventListener("click", buttonEditingClick);
+
+
+    let buttonDelete = document.createElement("button");
+    buttonDelete.className = "button buttonDelete";
+    td5.append(buttonDelete);
+
+    let imgDelete = document.createElement("img");
+    imgDelete.className = "icon delete-icon";
+    imgDelete.src = "icon/delete-icon.png";
+    imgDelete.alt = "Удалить";
+
+    buttonDelete.append(imgDelete);
+    buttonDelete.addEventListener("click", buttonDeleteClick);
 
     td1.textContent = id;
     tdFirstName.value = firstName;
@@ -236,5 +256,3 @@ function enumerationUsers(array) {
      createString(array[index].id, array[index].firstName, array[index].lastName);
     }
 }
-
-// положить данную инфу (методы) в gitHub
