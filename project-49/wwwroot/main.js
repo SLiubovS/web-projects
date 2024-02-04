@@ -21,8 +21,6 @@ if (response.ok) { // если HTTP-статус в диапазоне 200-299
     let array = JSON.parse(text);
 
     enumerationUsers(array);
-    createDeleteButtons();
-    createEditingButtons();
 
 } else {
     alert("Ошибка HTTP: " + response.status);
@@ -38,15 +36,6 @@ addButton.addEventListener("click", addUser);
 
 // раздел удаление пользователя
 
-async function createDeleteButtons() {
-
-    let buttonsDelete = document.getElementsByClassName('buttonDelete');
-
-    for (let button of buttonsDelete) {
-        button.addEventListener("click", buttonDeleteClick);
-    }
-}
-// отделила ф-ию удаления одной кнопки, навешиваю ее сразу при создании строки
 async function buttonDeleteClick() {
             let parent = this.closest(".tr-delete");
 
@@ -73,15 +62,6 @@ async function buttonDeleteClick() {
         }
 
 // раздел изменение пользователя
-function createEditingButtons() {
-
-// находим все кнопки редактирования (используется в методе GET)
-    let buttonEditing = document.getElementsByClassName('buttonEditing');
-
-    for (let buttonEd of buttonEditing) {
-        buttonEd.addEventListener("click", buttonEditingClick);
-    }
-}
 // отделила ф-ию редактирования одной кнопки, навешиваю ее сразу при создании строки
 async function buttonEditingClick () {
             // нашли строку, в которой нажата кнопка
@@ -160,7 +140,7 @@ async function addUser() {
          let obj = await response.text();
          let newUser = JSON.parse(obj);
 
-        createString(newUser.id, newUser.firstName, newUser.lastName);
+        createRow(newUser.id, newUser.firstName, newUser.lastName);
 
         firstName.value = '';
         lastName.value = '';
@@ -172,7 +152,7 @@ async function addUser() {
 
 // ф-ия создания 1 строки
 
-function createString(id, firstName, lastName) {
+function createRow(id, firstName, lastName) {
 
     let tr = document.createElement("tr"); // создали новую строку
     tr.className = "tr-delete tr-editing";
@@ -253,6 +233,6 @@ function enumerationUsers(array) {
 
     for (let index = 0; index <= array.length - 1; index++) {
 
-     createString(array[index].id, array[index].firstName, array[index].lastName);
+     createRow(array[index].id, array[index].firstName, array[index].lastName);
     }
 }
