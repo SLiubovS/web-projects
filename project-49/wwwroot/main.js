@@ -9,109 +9,87 @@ let lastName = document.getElementById("lastName");
 addButton.addEventListener("click", addUser);
 
 // раздел изменение пользователя
-function createEditingButtons() {
+// отделила ф-ия редактирования одной кнопки
+function buttonEditingClick() {
 
-// находим все кнопки редактирования (используется в методе GET)
-    let buttonEditing = document.getElementsByClassName('buttonEditing');
+    // нашли строку, в которой нажата кнопка
+    let parentEd = this.closest(".tr-editing");
 
-    for (let buttonEd of buttonEditing) {
-        buttonEd.addEventListener("click", buttonEditingClick);
+    // нужно найти поля ввода фамилия / имя данной строки и сделать их доступными для изменения
+    let childFirstName = parentEd.querySelector(".table-td-firstName");
+    let childLastName = parentEd.querySelector(".table-td-lastName");
+
+    // ищем 1 ребенка это id, нужен для чтения
+    let firstChildID = parentEd.firstElementChild.textContent; // id
+
+    let urlEditing = newUrl + firstChildID;
+
+    if (childFirstName.disabled === true || childLastName.disabled === true) {
+
+        childFirstName.disabled = false;
+        childLastName.disabled = false;
+
+        if ((childFirstName.textContent == null || "") || (childLastName.textContent == null || "")) return;
+    } else {
+
+        childFirstName.disabled = true;
+        childLastName.disabled = true;
+
+        fetch(urlEditing, {
+            method: 'PUT',
+            body: JSON.stringify({
+                firstName: childFirstName.value,
+                lastName: childLastName.value
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        }).then(response => {
+
+            if (response.ok) {
+
+                response
+                    .text()
+                    .then(text => {
+                        let updatedUser = JSON.parse(text);
+                        childFirstName.value = updatedUser.firstName;
+                        childLastName.value = updatedUser.lastName;
+                    });
+            } else {
+                alert("Ошибка HTTP: " + response.status);
+            }
+        });
     }
 }
-// отделила ф-ию редактирования одной кнопки, навешиваю ее сразу при создании строки
-    function buttonEditingClick () {
-
-
-        // нашли строку, в которой нажата кнопка
-        let parentEd = this.closest(".tr-editing");
-
-        // нужно найти поля ввода фамилия / имя данной строки и сделать их доступными для изменения
-        let childFirstName = parentEd.querySelector(".table-td-firstName");
-        let childLastName = parentEd.querySelector(".table-td-lastName");
-
-        // ищем 1 ребенка это id, нужен для чтения
-        let firstChildID = parentEd.firstElementChild.textContent; // id
-
-        let urlEditing = newUrl + firstChildID;
-
-        if (childFirstName.disabled === true || childLastName.disabled === true) {
-
-            childFirstName.disabled = false;
-            childLastName.disabled = false;
-
-            if ((childFirstName.textContent == null || "") || (childLastName.textContent == null || "")) return;
-        } else {
-
-            childFirstName.disabled = true;
-            childLastName.disabled = true;
-
-            fetch(urlEditing, {
-                method: 'PUT',
-                body: JSON.stringify({
-                    firstName: childFirstName.value,
-                    lastName: childLastName.value
-                }),
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8"
-                }
-            }).then(response => {
-
-                if (response.ok) {
-
-                    response
-                        .text()
-                        .then(text => {
-                            let updatedUser = JSON.parse(text);
-                            childFirstName.value = updatedUser.firstName;
-                            childLastName.value = updatedUser.lastName;
-                        });
-                } else {
-                    alert("Ошибка HTTP: " + response.status);
-                }
-            });
-        }
-    }
-
 
 // раздел удаление пользователя
+//  ф-ия удаления одной кнопки
+function buttonDeleteClick() {
 
-// находим все кнопки удаления (используется в методе GET)
-function createDeleteButtons() {
+    let parent = this.closest(".tr-delete");
 
-    let buttonsDelete = document.getElementsByClassName('buttonDelete');
+    let childId = parent.firstElementChild.textContent;
 
-    for (let button of buttonsDelete) {
-        button.addEventListener("click", buttonDeleteClick);
-    }
-}
+    let regexp = /(^([0-9a-z]{8})-([0-9a-z]{4})-([0-9a-z]{4})-([0-9a-z]{4})-([0-9a-z]{12})$)/gui;
 
-// отделила ф-ию удаления одной кнопки, навешиваю ее сразу при создании строки
-        function buttonDeleteClick() {
+    if (childId.match(regexp) == null) return;
 
-            let parent = this.closest(".tr-delete");
+    let deleteUrl = newUrl + childId;
 
-            let childId = parent.firstElementChild.textContent;
+    fetch(deleteUrl, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+    }).then(response => {
 
-            let regexp = /(^([0-9a-z]{8})-([0-9a-z]{4})-([0-9a-z]{4})-([0-9a-z]{4})-([0-9a-z]{12})$)/gui;
-
-            if (childId.match(regexp) == null) return;
-
-            let deleteUrl = newUrl + childId;
-
-            fetch(deleteUrl, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json;charset=utf-8'
-                },
-            }).then(response => {
-
-                if (response.ok) {
-                    parent.remove();
-                } else {
-                    alert(`Ошибка HTTP: ${response.status} Пользователь с id ${childId} не найден`);
-                }
-            });
+        if (response.ok) {
+            parent.remove();
+        } else {
+            alert(`Ошибка HTTP: ${response.status} Пользователь с id ${childId} не найден`);
         }
+    });
+}
 
 // раздел получение списка всех пользователей
 fetch(url, {
@@ -129,9 +107,7 @@ fetch(url, {
             response
                 .text()
                 .then(text => JSON.parse(text)) // text => JSON.parse(text) или (тоже самое) : function(text) { return JSON.parse(text); }
-                .then(enumerationUsers)
-                .then(createDeleteButtons)
-                .then(createEditingButtons);
+                .then(enumerationUsers);
 
         } else {
             alert("Ошибка HTTP: " + response.status);
@@ -172,19 +148,19 @@ function addUser() { // ф-ия для добавления 1 нового по�
             response
                 .text()
                 .then(text => {
-                        let newUser = JSON.parse(text);
-                        createString(newUser.id, newUser.firstName, newUser.lastName);
+                    let newUser = JSON.parse(text);
+                    createRow(newUser.id, newUser.firstName, newUser.lastName);
 
-                        firstName.value = '';
-                        lastName.value = '';
-                    });
+                    firstName.value = '';
+                    lastName.value = '';
+                });
         } else {
             alert(`Ошибка HTTP: ${response.status}`);
         }
     });
 }
 
-function createString(id, firstName, lastName) {
+function createRow(id, firstName, lastName) {
 
     let tr = document.createElement("tr"); // создали новую строку
     tr.className = "tr-delete tr-editing";
@@ -265,7 +241,7 @@ function enumerationUsers(array) { // ф-ия для получения всех
 
     for (let index = 0; index <= array.length - 1; index++) {
 
-        createString(array[index].id, array[index].firstName, array[index].lastName);
+        createRow(array[index].id, array[index].firstName, array[index].lastName);
     }
 }
 
