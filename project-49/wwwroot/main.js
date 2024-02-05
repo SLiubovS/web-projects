@@ -16,8 +16,8 @@ function buttonEditingClick() {
     let parentEd = this.closest(".tr-editing");
 
     // нужно найти поля ввода фамилия / имя данной строки и сделать их доступными для изменения
-    let childFirstName = parentEd.querySelector(".table-td-firstName");
-    let childLastName = parentEd.querySelector(".table-td-lastName");
+    let childFirstName = parentEd.querySelector(".input-firstName");
+    let childLastName = parentEd.querySelector(".input-lastName");
 
     // ищем 1 ребенка это id, нужен для чтения
     let firstChildID = parentEd.firstElementChild.textContent; // id
@@ -172,57 +172,38 @@ function createRow(id, firstName, lastName) {
     let td5 = document.createElement("td");
 
     let tdFirstName = document.createElement("input");
-    tdFirstName.className = "input table-td-firstName";
     tdFirstName.disabled = true;
     td2.append(tdFirstName);
 
     let tdLastName = document.createElement("input");
-    tdLastName.className = "input table-td-lastName";
     tdLastName.disabled = true;
     td3.append(tdLastName);
 
-    td1.className = "table-td table-td-id";
-    td2.className = "table-td";
-    td3.className = "table-td";
-
-    td1.style.padding = "0 10px";
-    td2.style.padding = "0 10px";
-    td3.style.padding = "0 10px";
-    td4.style.padding = "0 10px";
-
-    td4.className = 'table-icon';
-    td5.className = 'table-icon';
-
-//     td4.insertAdjacentHTML("afterbegin", `<button class="button buttonEditing">
-// <img class="icon editing-icon" src="icon/editing-icon.png" alt="Редактировать"></button>`);
-//     td5.insertAdjacentHTML("afterbegin", `<button class="button buttonDelete">
-// <img class="icon delete-icon" src="icon/delete-icon.png" alt="Удалить"></button>`);
+    tdFirstName.className = "input-firstName";
+    tdLastName.className = "input-lastName";
 
     let buttonEditing = document.createElement("button");
-    buttonEditing.className = "button buttonEditing";
+    buttonEditing.className = "btn btn-warning";
+    buttonEditing.style.width = "46px";
     td4.append(buttonEditing);
 
-    let imgEditing = document.createElement("img");
-    imgEditing.className = "icon editing-icon";
-    imgEditing.src = "icon/editing-icon.png";
-    imgEditing.alt = "Редактировать";
+    let iconEditing = document.createElement("i");
+    iconEditing.className = "fa-solid fa-pen";
+    iconEditing.alt = "Редактировать";
 
-    buttonEditing.append(imgEditing);
+    buttonEditing.append(iconEditing);
     buttonEditing.addEventListener("click", buttonEditingClick);
 
-
     let buttonDelete = document.createElement("button");
-    buttonDelete.className = "button buttonDelete";
+    buttonDelete.className = "btn btn-danger";
     td5.append(buttonDelete);
 
-    let imgDelete = document.createElement("img");
-    imgDelete.className = "icon delete-icon";
-    imgDelete.src = "icon/delete-icon.png";
-    imgDelete.alt = "Удалить";
+    let iconDelete = document.createElement("i");
+    iconDelete.className = "fa-solid fa-user-xmark";
+    iconDelete.alt = "Удалить";
 
-    buttonDelete.append(imgDelete);
+    buttonDelete.append(iconDelete);
     buttonDelete.addEventListener("click", buttonDeleteClick);
-
 
     td1.textContent = id;
     tdFirstName.value = firstName;

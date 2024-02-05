@@ -5,67 +5,43 @@
     <meta name="viewport">
     <title></title>
     <link rel="stylesheet" href="bootstrap.css">
-    <link href="css/all.css" rel="stylesheet">
-<!--    <link rel="stylesheet" href="style.css">-->
+    <link rel="stylesheet" href="css/all.css">
 </head>
 <body>
-<div id="div1" class="container">
-    <table id="table" class="table">
-        <tbody id="tbodyHead">
+<div class="container">
+    <table class="table table-striped table-hover">
+        <tbody id="tbodyHead" class="table-hover">
         <tr class="table-tr table-primary">
-            <th class="table-th">id</th>
-            <th class="table-th">firstName</th>
-            <th class="table-th">lastName</th>
+            <th>id</th>
+            <th>firstName</th>
+            <th>lastName</th>
             <th></th>
             <th></th>
         </tr>
         </tbody>
-        <tbody id="tbodyMain">
+        <tbody id="tbodyMain" class="table-hover table-primary">
         <tr>
             <td></td>
-            <td class="table-td">
+            <td>
                 <form>
-                    <label for="firstName"></label><input type="text" id="firstName" class="input firstName">
-                </form>
-            </td>
-            <td class="table-td">
-                <form>
-                    <label for="lastName"></label><input type="text" id="lastName" class="input lastName">
+                    <label for="firstName"></label><input type="text" id="firstName">
                 </form>
             </td>
             <td>
-                <button id="addButton" class="btn btn-primary">
+                <form>
+                    <label for="lastName"></label><input type="text" id="lastName">
+                </form>
+            </td>
+            <td>
+                <button id="addButton" class="btn btn-success">
                     <i class="fa-solid fa-user-plus"></i>
-<!--                    <img class="icon add-icon" src="icon/add-icon.png" alt="Добавить">-->
                 </button>
             </td>
+            <td></td>
         </tr>
         </tbody>
     </table>
 </div>
-
-<div class="container">
-    <div class="row">
-        <div class="col bg-primary">
-            Колонка1
-        </div>
-        <div class="col bg-primary-subtle">
-            Колонка2
-        </div>
-        <div class="col bg-secondary">
-            Колонка3
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-8 bg-secondary-subtle">
-            Колонка2/1
-        </div>
-        <div class="col bg-success">
-            Колонка2/2
-        </div>
-    </div>
-</div>
-
 <script src="bootstrap.bundle.js"></script>
 <script src="main.js"></script>
 </body>
