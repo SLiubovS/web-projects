@@ -1,5 +1,7 @@
 let url = "http://localhost:5000/api/Users";
 let newUrl = "http://localhost:5000/api/Users/";
+let urlForm = "http://localhost:5000/api/Users/form/";
+let urlFormAdd = "http://localhost:5000/api/Users/form";
 
 let tbodyHead = document.getElementById("tbodyHead");
 let addButton = document.getElementById("addButton");
@@ -9,7 +11,7 @@ let lastName = document.getElementById("lastName");
 addButton.addEventListener("click", addUser);
 
 // раздел изменение пользователя
-// отделила ф-ия редактирования одной кнопки
+// отделила ф-ия редактирования одной строки
 function buttonEditingClick() {
 
     // нашли строку, в которой нажата кнопка
@@ -22,7 +24,7 @@ function buttonEditingClick() {
     // ищем 1 ребенка это id, нужен для чтения
     let firstChildID = parentEd.firstElementChild.textContent; // id
 
-    let urlEditing = newUrl + firstChildID;
+    let urlEditing = urlForm + firstChildID;
 
     if (childFirstName.disabled === true || childLastName.disabled === true) {
 
@@ -31,19 +33,15 @@ function buttonEditingClick() {
 
         if ((childFirstName.textContent == null || "") || (childLastName.textContent == null || "")) return;
     } else {
-
         childFirstName.disabled = true;
         childLastName.disabled = true;
+        let formData = new FormData();
+        formData.append("FirstName", childFirstName.value);
+        formData.append("LastName", childLastName.value);
 
         fetch(urlEditing, {
             method: 'PUT',
-            body: JSON.stringify({
-                firstName: childFirstName.value,
-                lastName: childLastName.value
-            }),
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            }
+            body: formData
         }).then(response => {
 
             if (response.ok) {
@@ -63,7 +61,7 @@ function buttonEditingClick() {
 }
 
 // раздел удаление пользователя
-//  ф-ия удаления одной кнопки
+//  ф-ия удаления одной строки
 function buttonDeleteClick() {
 
     let parent = this.closest(".tr-delete");
@@ -103,7 +101,6 @@ fetch(url, {
 
             // функциональный стиль программирования
             // когда результат 1 функции передается следующей вниз по цепочке
-
             response
                 .text()
                 .then(text => JSON.parse(text)) // text => JSON.parse(text) или (тоже самое) : function(text) { return JSON.parse(text); }
@@ -114,51 +111,41 @@ fetch(url, {
         }
     });
 
-
 // вынесла используемые ф-ии в конец
-
 function addUser() { // ф-ия для добавления 1 нового пользователя
-    url = "http://localhost:5000/api/Users";
 
-    firstName.textContent = firstName.value;
-    lastName.textContent = lastName.value;
+    if (firstName.value === "" || null) return;
+    if (lastName.value === "" || null) return;
 
-    if (firstName.textContent === "" || null) return;
-    if (lastName.textContent === "" || null) return;
+        let formData = new FormData();
+        formData.append("FirstName", firstName.value);
+        formData.append("LastName", lastName.value);
 
-    // создали объект с введенными данными
+        // создание пользователя
 
-    let user = {
-        firstName: firstName.textContent,
-        lastName: lastName.textContent
-    };
+        fetch(urlFormAdd, {
+            method: 'POST',
+            body: formData
+        }).then(response => {
 
-    // создание пользователя
+            if (response.ok) {
 
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-        },
-        body: JSON.stringify(user)
-    }).then(response => {
+                response
+                    .text()
+                    .then(text => {
+                        let newUser = JSON.parse(text);
+                        createRow(newUser.id, newUser.firstName, newUser.lastName);
 
-        if (response.ok) {
-
-            response
-                .text()
-                .then(text => {
-                    let newUser = JSON.parse(text);
-                    createRow(newUser.id, newUser.firstName, newUser.lastName);
-
-                    firstName.value = '';
-                    lastName.value = '';
-                });
-        } else {
-            alert(`Ошибка HTTP: ${response.status}`);
-        }
-    });
-}
+                        firstName.value = '';
+                        lastName.value = '';
+                       // firstName.disabled = false;
+                       // lastName.disabled = false;
+                    });
+            } else {
+                alert(`Ошибка HTTP: ${response.status}`);
+            }
+        });
+    }
 
 function createRow(id, firstName, lastName) {
 
@@ -171,16 +158,21 @@ function createRow(id, firstName, lastName) {
     let td4 = document.createElement("td");
     let td5 = document.createElement("td");
 
+    let formFirstName = document.createElement("form");
+    let formLastName = document.createElement("form");
+
     let tdFirstName = document.createElement("input");
     tdFirstName.disabled = true;
-    td2.append(tdFirstName);
-
     let tdLastName = document.createElement("input");
     tdLastName.disabled = true;
-    td3.append(tdLastName);
 
     tdFirstName.className = "input-firstName";
     tdLastName.className = "input-lastName";
+
+    td2.append(formFirstName);
+    formFirstName.append(tdFirstName);
+    td3.append(formLastName);
+    formLastName.append(tdLastName);
 
     let buttonEditing = document.createElement("button");
     buttonEditing.className = "btn btn-warning";
@@ -225,6 +217,3 @@ function enumerationUsers(array) { // ф-ия для получения всех
         createRow(array[index].id, array[index].firstName, array[index].lastName);
     }
 }
-
-// post
-// put
