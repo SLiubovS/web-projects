@@ -226,3 +226,5 @@ function enumerationUsers(array) { // ф-ия для получения всех
     }
 }
 
+// post
+// put
