@@ -3,6 +3,6 @@ const app = express();
 
 app.use(express.static(__dirname + "/wwwroot"));
 
-app.listen(6000, function () {
-    console.log("Сервер запущен по адресу http://localhost:6000");
+app.listen(5555, function () {
+    console.log("Сервер запущен по адресу http://localhost:5555");
 });

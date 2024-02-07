@@ -7,6 +7,36 @@
     <link rel="stylesheet" href="css/all.css">
 </head>
 <body>
+<div class="container">
+    <table class="table table-success table-striped">
+        <thead class="align-items-center">
+        <th class="col-4">
+            id
+        </th>
+        <th class="col-4">
+            Имя файла
+        </th>
+        <th class="col-2"></th>
+        <th class="col-2"></th>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
 
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <form enctype="multipart/form-data" method="post">
+                    <p><input class="btn btn-outline-secondary" type="file" name="formFile">
+                        <input class="btn btn-success" type="submit" value="Отправить">
+                    </p>
+                </form>
+            </div>
+        </div>
+</div>
+
+<script src="bootstrap.bundle.js"></script>
+<script src="main.js"></script>
 </body>
 </html>
