@@ -1,10 +1,10 @@
-let url = "http://localhost:5000/api/Files";
-let newUrl = "http://localhost:5000/api/Files/";
-let tbody = document.getElementById("tbody");
-let formFile = document.getElementById("formFile");
+let url = {
+    urlFiles : "http://localhost:5000/api/Files",
+    urlFilesId : "http://localhost:5000/api/Files/"
+}
 
 // раздел получение списка всех пользователей
-fetch(url, {
+fetch(url.urlFiles, {
     method: 'GET',
     headers: {
         'Content-Type': 'application/json;charset=utf-8'
@@ -26,8 +26,13 @@ fetch(url, {
         }
     });
 
+let inputFile = document.getElementById("inputFile");
+let formData = new formData();
+
+formData.append("formFile", inputFile);
+
 // раздел добавления 1 пользователя
-fetch(url, {
+fetch(url.urlFiles, {
     method: 'POST',
     headers: {
         'Content-Type': 'multipart/form-data'
