@@ -41,10 +41,9 @@ function sendForm() {
     xhr.send(formData);
     xhr.onload = function() {
         alert(`Загружено: ${xhr.status} ${xhr.response}`);
-        createRow(formData.id, formData.name);
-        enumerationFiles();
+       let obj = JSON.parse(xhr.response);
+        createRow(obj.id, obj.name);
     };
-
     xhr.onerror = function() { // происходит, только когда запрос совсем не получилось выполнить
         alert(`Ошибка соединения`);
     };
@@ -71,6 +70,14 @@ function sendForm() {
     // });
 }
 
+// Раздел скачивание файла
+// 1. получить кнопку скачать
+// функция клик на нее
+// при нажатии - ищем родителя (строку) в которой id, имя файла
+// отправляем запрос с id на сервер
+// получаем ответ: объект с id, имя файла
+
+
 
 function createRow(id, name) {
 
@@ -83,12 +90,12 @@ function createRow(id, name) {
     let td4 = document.createElement("td");
 
     let buttonDownload = document.createElement("i");
-    buttonDownload.className = "btn btn-warning fa-solid fa-pen";
+    buttonDownload.className = "btn btn-warning fa-solid fa-arrow-down";
     buttonDownload.alt = "Скачать";
     td3.append(buttonDownload);
 
     let buttonDelete = document.createElement("i");
-    buttonDelete.className = "btn btn-danger fa-solid fa-user-xmark";
+    buttonDelete.className = "btn btn-danger fa-solid fa-ban";
     buttonDelete.alt = "Удалить";
     td4.append(buttonDelete);
 
@@ -112,3 +119,4 @@ function enumerationFiles(array) {
         createRow(array[index].id, array[index].name);
     }
 }
+
