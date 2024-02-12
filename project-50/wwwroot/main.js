@@ -70,6 +70,20 @@ function sendForm() {
     // });
 }
 
+// раздел удаление файла
+
+function deleteFile () {
+
+    let parent = this.closest(".tr-download");
+    let childID = parent.firstChild.textContent;
+    // let childName = parent.childNodes[1].textContent;
+    let newUrl = url.Id + childID;
+
+
+}
+
+
+
 // Раздел скачивание файла
 // 1. получить кнопку скачать
 // функция клик на нее - сразу при создании!
@@ -77,13 +91,48 @@ function sendForm() {
 // отправляем запрос с id на сервер
 // получаем ответ: объект с id, имя файла
 
+
+
 function downloadFile () {
-    alert("click-download!");
+    let parent = this.closest(".tr-download");
+    let childID = parent.firstChild.textContent;
+    let childName = parent.childNodes[1].textContent;
+    let newUrl = url.Id + childID;
+
+    fetch(newUrl, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+    })
+        .then(response => {
+            if (response.ok) {
+
+                response
+                    .text()
+                    .then(text => JSON.stringify(text))
+                    .then(aDownload);
+
+                function aDownload(data) {
+
+                    let a = document.createElement("a");
+                    let file = new Blob([data], {type: 'application/json'});
+                    a.href = URL.createObjectURL(file);
+                    a.download = childName;
+                    a.click();
+                }
+
+            } else {
+                alert("Ошибка HTTP: " + response.status);
+            }
+        });
+
+
+
+
 }
 
-function deleteFile () {
-    alert("click-delete!");
-}
+
 
 
 function createRow(id, name) {
