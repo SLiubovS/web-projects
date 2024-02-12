@@ -74,25 +74,25 @@ function sendForm() {
 
 function deleteFile () {
 
-    let parent = this.closest(".tr-download");
+    let parent = this.closest(".tr-delete");
     let childID = parent.firstChild.textContent;
-    // let childName = parent.childNodes[1].textContent;
     let urlDelete = url.Id + childID;
 
-    let response = await fetch(urlDelete, {
+    fetch(urlDelete, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
         },
-    });
+    }).then(response => {
 
-    if (response.ok) {
-        parent.remove();
-    } else {
-        alert(`Ошибка HTTP: ${response.status} Пользователь с id ${childID} не найден`);
-    }
+        if (response.ok) {
+            parent.remove();
+        } else {
+            alert(`Ошибка HTTP: ${response.status} Пользователь с id ${childID} не найден`);
+        }
+    });
 }
-}
+
 
 
 
