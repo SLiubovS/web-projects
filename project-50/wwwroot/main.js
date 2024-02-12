@@ -77,9 +77,21 @@ function deleteFile () {
     let parent = this.closest(".tr-download");
     let childID = parent.firstChild.textContent;
     // let childName = parent.childNodes[1].textContent;
-    let newUrl = url.Id + childID;
+    let urlDelete = url.Id + childID;
 
+    let response = await fetch(urlDelete, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+    });
 
+    if (response.ok) {
+        parent.remove();
+    } else {
+        alert(`Ошибка HTTP: ${response.status} Пользователь с id ${childID} не найден`);
+    }
+}
 }
 
 
@@ -97,9 +109,9 @@ function downloadFile () {
     let parent = this.closest(".tr-download");
     let childID = parent.firstChild.textContent;
     let childName = parent.childNodes[1].textContent;
-    let newUrl = url.Id + childID;
+    let urlDownload = url.Id + childID;
 
-    fetch(newUrl, {
+    fetch(urlDownload, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
