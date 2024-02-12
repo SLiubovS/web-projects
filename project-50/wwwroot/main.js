@@ -1,5 +1,5 @@
 let url = {
-    files: "http://localhost:5000/api/Files",
+    Files: "http://localhost:5000/api/Files",
     Id: "http://localhost:5000/api/Files/"
 }
 let tbody = document.getElementById("tbody");
@@ -10,7 +10,7 @@ let form = document.getElementById("form");
 sendBtn.addEventListener("click", sendForm);
 
 // раздел получение списка всех пользователей
-fetch(url.files, {
+fetch(url.Files, {
     method: 'GET',
     headers: {
         'Content-Type': 'application/json;charset=utf-8'
@@ -36,43 +36,42 @@ fetch(url.files, {
 function sendForm() {
 
     let formData = new FormData(form);
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", url.files);
-    xhr.send(formData);
-    xhr.onload = function() {
-        alert(`Загружено: ${xhr.status} ${xhr.response}`);
-       let obj = JSON.parse(xhr.response);
-        createRow(obj.id, obj.name);
-    };
-    xhr.onerror = function() { // происходит, только когда запрос совсем не получилось выполнить
-        alert(`Ошибка соединения`);
-    };
 
-
-    // fetch(url.files, {
-    //     method: 'POST',
-    //     // headers: {
-    //     //     'Content-Type': 'multipart/form-data'
-    //     // },
-    //     body: formData,
-    //     // redirect: 'follow'
-    // })
-    //     .then(response => {
-    //         if (response.ok) {
-    //             response
-    //                 .text()
-    //                 .then(text => JSON.parse(text));
-    //             createRow(formData.id, formData.name);
-    //         } else {
-    //             alert(`Ошибка HTTP: ${response.status}`);
-    //         }
-    //     });
-    // });
+    fetch(url.Files, {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => {
+            if (response.ok) {
+                response
+                    .text()
+                    .then(text => JSON.parse(text))
+                    .then(obj => createRow(obj.id, obj.name));
+            } else {
+                alert(`Ошибка HTTP: ${response.status}`);
+            }
+        });
 }
+
+// аналог метода POST через XMLHttpRequest()
+
+    // let xhr = new XMLHttpRequest();
+    // xhr.open("POST", url.files);
+    // xhr.send(formData);
+    // xhr.onload = function () {
+    //     //  alert(`Загружено: ${xhr.status} ${xhr.response}`);
+    //     let obj = JSON.parse(xhr.response);
+    //     createRow(obj.id, obj.name);
+    // };
+    // xhr.onerror = function () { // происходит, только когда запрос совсем не получилось выполнить
+    //     alert(`Ошибка соединения`);
+    // };
+
+
 
 // раздел удаление файла
 
-function deleteFile () {
+function deleteFile() {
 
     let parent = this.closest(".tr-delete");
     let childID = parent.firstChild.textContent;
@@ -93,60 +92,6 @@ function deleteFile () {
     });
 }
 
-
-
-
-// Раздел скачивание файла
-// 1. получить кнопку скачать
-// функция клик на нее - сразу при создании!
-// при нажатии - ищем родителя (строку) в которой id, имя файла
-// отправляем запрос с id на сервер
-// получаем ответ: объект с id, имя файла
-
-
-
-function downloadFile () {
-    let parent = this.closest(".tr-download");
-    let childID = parent.firstChild.textContent;
-    let childName = parent.childNodes[1].textContent;
-    let urlDownload = url.Id + childID;
-
-    fetch(urlDownload, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-        },
-    })
-        .then(response => {
-            if (response.ok) {
-
-                response
-                    .text()
-                    .then(text => JSON.stringify(text))
-                    .then(aDownload);
-
-                function aDownload(data) {
-
-                    let a = document.createElement("a");
-                    let file = new Blob([data], {type: 'application/json'});
-                    a.href = URL.createObjectURL(file);
-                    a.download = childName;
-                    a.click();
-                }
-
-            } else {
-                alert("Ошибка HTTP: " + response.status);
-            }
-        });
-
-
-
-
-}
-
-
-
-
 function createRow(id, name) {
 
     let tr = document.createElement("tr"); // создали новую строку
@@ -157,13 +102,15 @@ function createRow(id, name) {
     let td3 = document.createElement("td"); // создали новые поля строки
     let td4 = document.createElement("td");
 
-    let buttonDownload = document.createElement("i");
-    buttonDownload.className = "btn btn-warning fa-solid fa-arrow-down";
-    buttonDownload.alt = "Скачать";
-    td3.append(buttonDownload);
-    buttonDownload.addEventListener("click", downloadFile);
+    let aDownload = document.createElement("a");
+    aDownload.className = "btn btn-warning fa-solid fa-arrow-down";
+    aDownload.alt = "Скачать";
+    aDownload.href = url.Id + id;
+    console.log(aDownload.href);
+    td3.append(aDownload);
 
-    let buttonDelete = document.createElement("i");
+
+    let buttonDelete = document.createElement("a");
     buttonDelete.className = "btn btn-danger fa-solid fa-ban";
     buttonDelete.alt = "Удалить";
     td4.append(buttonDelete);
