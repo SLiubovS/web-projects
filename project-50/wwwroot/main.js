@@ -72,11 +72,18 @@ function sendForm() {
 
 // Раздел скачивание файла
 // 1. получить кнопку скачать
-// функция клик на нее
+// функция клик на нее - сразу при создании!
 // при нажатии - ищем родителя (строку) в которой id, имя файла
 // отправляем запрос с id на сервер
 // получаем ответ: объект с id, имя файла
 
+function downloadFile () {
+    alert("click-download!");
+}
+
+function deleteFile () {
+    alert("click-delete!");
+}
 
 
 function createRow(id, name) {
@@ -93,11 +100,13 @@ function createRow(id, name) {
     buttonDownload.className = "btn btn-warning fa-solid fa-arrow-down";
     buttonDownload.alt = "Скачать";
     td3.append(buttonDownload);
+    buttonDownload.addEventListener("click", downloadFile);
 
     let buttonDelete = document.createElement("i");
     buttonDelete.className = "btn btn-danger fa-solid fa-ban";
     buttonDelete.alt = "Удалить";
     td4.append(buttonDelete);
+    buttonDelete.addEventListener("click", deleteFile);
 
     td1.textContent = id;
     td2.textContent = name;
