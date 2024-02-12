@@ -1,10 +1,16 @@
 let url = {
-    urlFiles : "http://localhost:5000/api/Files",
-    urlFilesId : "http://localhost:5000/api/Files/"
+    files: "http://localhost:5000/api/Files",
+    Id: "http://localhost:5000/api/Files/"
 }
+let tbody = document.getElementById("tbody");
+let inputFile = document.getElementById("inputFile");
+let sendBtn = document.getElementById("sendBtn");
+let form = document.getElementById("form");
+
+sendBtn.addEventListener("click", sendForm);
 
 // раздел получение списка всех пользователей
-fetch(url.urlFiles, {
+fetch(url.files, {
     method: 'GET',
     headers: {
         'Content-Type': 'application/json;charset=utf-8'
@@ -26,30 +32,44 @@ fetch(url.urlFiles, {
         }
     });
 
-let inputFile = document.getElementById("inputFile");
-let formData = new formData();
-
-formData.append("formFile", inputFile);
-
 // раздел добавления 1 пользователя
-fetch(url.urlFiles, {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'multipart/form-data'
-    },
-    body: JSON.stringify(formFile)
-})
-    .then(response => {
-        if (response.ok) {
-            response
-                .text()
-                .then(text => JSON.parse(text));
-            createRow(formFile.id, formFile.name);
-        } else {
-            alert(`Ошибка HTTP: ${response.status}`);
-        }
-    });
+function sendForm() {
 
+    let formData = new FormData(form);
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url.files);
+    xhr.send(formData);
+    xhr.onload = function() {
+        alert(`Загружено: ${xhr.status} ${xhr.response}`);
+        createRow(formData.id, formData.name);
+        enumerationFiles();
+    };
+
+    xhr.onerror = function() { // происходит, только когда запрос совсем не получилось выполнить
+        alert(`Ошибка соединения`);
+    };
+
+
+    // fetch(url.files, {
+    //     method: 'POST',
+    //     // headers: {
+    //     //     'Content-Type': 'multipart/form-data'
+    //     // },
+    //     body: formData,
+    //     // redirect: 'follow'
+    // })
+    //     .then(response => {
+    //         if (response.ok) {
+    //             response
+    //                 .text()
+    //                 .then(text => JSON.parse(text));
+    //             createRow(formData.id, formData.name);
+    //         } else {
+    //             alert(`Ошибка HTTP: ${response.status}`);
+    //         }
+    //     });
+    // });
+}
 
 
 function createRow(id, name) {
@@ -73,7 +93,7 @@ function createRow(id, name) {
     td4.append(buttonDelete);
 
     td1.textContent = id;
-    td2.value = name;
+    td2.textContent = name;
 
     tr.append(td1);
     tr.append(td2);
