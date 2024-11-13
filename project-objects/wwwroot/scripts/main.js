@@ -1,11 +1,11 @@
-import {Person} from "./person.js";
-import {Employee} from "./employee.js";
+import { Person } from "./person.js";
+import { Employee } from "./employee.js";
 
 let user = {
     name: "John",
     surname: "Smith",
     age: 25,
-    getFullName: function() {
+    getFullName: function () {
         return `${this.name} ${this.surname}`;
     },
     getFullNameWithAge: function () {
@@ -30,14 +30,13 @@ function User(name, surname, age) {
     };
 }
 
-let user2 = new User("Дима", "Соловьев", 31);
+let user2 = new User("Иван", "Иванов", 31);
 let user3 = new User("Люба", "Соловьева", 29);
-
 
 console.log(user2.getFullNameWithAge());
 console.log(user3.getFullNameWithAge());
 
-let user4 = new Person("Саша", "Соловьев", 63);
+let user4 = new Person("Саша", "Петров", 63);
 
 console.log(user4.getFullNameWithAge());
 
