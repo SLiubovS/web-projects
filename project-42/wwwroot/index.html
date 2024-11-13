@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -24,10 +25,11 @@
         }
     </style>
 </head>
+
 <body>
-<p>Кликните по "изображению" мыши и перемещайте её с помощью клавиш со стрелками.</p>
+    <p>Кликните по "изображению" мыши и перемещайте её с помощью клавиш со стрелками.</p>
 
-<pre id="mouse">
+    <pre id="mouse">
  _   _
 (q\_/p)
  /. .\
@@ -39,7 +41,7 @@
  nn^nn
 </pre>
 
-<pre id="mouse2">
+    <pre id="mouse2">
  _   _
 (q\_/p)
  /. .\
@@ -51,38 +53,39 @@
  nn^nn
 </pre>
 
-<script>
-    let mouse = document.getElementById("mouse");
-    mouse.tabIndex = 1;
-    mouse.onfocus = function () {
-        this.addEventListener("keydown", keydown);
-        this.getBoundingClientRect();
-        this.style.position = "fixed";
-    }
+    <script>
+        let mouse = document.getElementById("mouse");
+        mouse.tabIndex = 1;
+        mouse.onfocus = function () {
+            this.addEventListener("keydown", keydown);
+            this.getBoundingClientRect();
+            this.style.position = "fixed";
+        }
 
-    let mouse2 = document.getElementById("mouse2");
-    mouse2.tabIndex = 2;
-    mouse2.onfocus = function () {
-        this.addEventListener("keydown", keydown);
-        this.getBoundingClientRect();
-        this.style.position = "fixed";
-    }
+        let mouse2 = document.getElementById("mouse2");
+        mouse2.tabIndex = 2;
+        mouse2.onfocus = function () {
+            this.addEventListener("keydown", keydown);
+            this.getBoundingClientRect();
+            this.style.position = "fixed";
+        }
 
-    function keydown(event) {
+        function keydown(event) {
 
-        if (event.key === "ArrowUp") {  // стрелка вверх
-            this.style.top = this.offsetTop - this.clientHeight + "px";
+            if (event.key === "ArrowUp") {  // стрелка вверх
+                this.style.top = this.offsetTop - this.clientHeight + "px";
+            }
+            if (event.key === 'ArrowLeft') {  // стрелка в лево
+                this.style.left = this.offsetLeft - this.clientWidth + "px";
+            }
+            if (event.key === 'ArrowDown') { // стрелка вниз
+                this.style.top = this.offsetTop + this.clientHeight + "px";
+            }
+            if (event.key === 'ArrowRight') { // стрелка вправо
+                this.style.left = this.offsetLeft + this.clientWidth + "px";
+            }
         }
-        if (event.key === 'ArrowLeft') {  // стрелка в лево
-            this.style.left = this.offsetLeft - this.clientWidth + "px";
-        }
-        if (event.key === 'ArrowDown') { // стрелка вниз
-            this.style.top = this.offsetTop + this.clientHeight + "px";
-        }
-        if (event.key === 'ArrowRight') { // стрелка вправо
-            this.style.left = this.offsetLeft + this.clientWidth + "px";
-        }
-    }
-</script>
+    </script>
 </body>
+
 </html>

@@ -19,9 +19,7 @@ async function getUsers(names) {
         array.push(arr);
     }
     let result = await Promise.all(array);
-
     console.log(`arr: ${arr}, array: ${array}, result: ${result}`);
-
     return result;
 }
 

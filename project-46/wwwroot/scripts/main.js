@@ -83,9 +83,6 @@ console.log(Object.values(pussyCat));
 console.log(Object.keys(hawk));
 console.log(Object.values(hawk));
 
-
-
-
 // работа с кнопкой (Открытие окон и методы window, попап)
 
 let button = document.getElementById("but");
@@ -93,9 +90,9 @@ let button = document.getElementById("but");
 let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
 width=550,height=500,left=1150,top=250`;
 
-button.onclick = ()=> {
+button.onclick = () => {
     let newWindow = open('https://ru.wikipedia.org/wiki/%D0%91%D0%B8%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5_%D0%B1%D0%B5%D1%81%D1%81%D0%BC%D0%B5%D1%80%D1%82%D0%B8%D0%B5', 'test', params);
-popUpLoad(newWindow);
+    popUpLoad(newWindow);
 };
 
 function popUpLoad(event) {
@@ -107,9 +104,9 @@ function popUpLoad(event) {
 
 let regexp = /\b\d\d:\d\d\b/g;
 
-    let str = "Завтрак в 09:00 или в 10:00 в комнате 123:456";
+let str = "Завтрак в 09:00 или в 10:00 в комнате 123:456";
 
-   // alert(str.match(regexp));
+// alert(str.match(regexp));
 
 // alert( "Вуля Валя Вуаль".match(/В[уа]ля/gi) ); // null, нет совпадений
 // ищет "В", затем [у или а], потом "ля"

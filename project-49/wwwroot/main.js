@@ -1,8 +1,6 @@
 let url = "http://localhost:5000/api/Users";
 let newUrl = "http://localhost:5000/api/Users/";
-
 let tbodyHead = document.getElementById("tbodyHead");
-
 
 // раздел получения всех пользователей
 
@@ -16,12 +14,11 @@ let response = await fetch(url, {
 if (response.ok) { // если HTTP-статус в диапазоне 200-299
     // получаем тело ответа в виде текста
     let text = await response.text();
-//преобразовали текст в массив с объектами внутри
+    //преобразовали текст в массив с объектами внутри
     // получили массив объектов, где 1 объект это отдельный пользователь с полями id, lastName, firstName
     let array = JSON.parse(text);
 
     enumerationUsers(array);
-
 } else {
     alert("Ошибка HTTP: " + response.status);
 }
@@ -32,83 +29,79 @@ let lastName = document.getElementById("lastName");
 
 addButton.addEventListener("click", addUser);
 
-
-
 // раздел удаление пользователя
 
 async function buttonDeleteClick() {
-            let parent = this.closest(".tr-delete");
+    let parent = this.closest(".tr-delete");
+    let childId = parent.firstElementChild.textContent;
+    let regexp = /(^([0-9a-z]{8})-([0-9a-z]{4})-([0-9a-z]{4})-([0-9a-z]{4})-([0-9a-z]{12})$)/gui;
 
-            let childId = parent.firstElementChild.textContent;
+    if (childId.match(regexp) == null) return;
 
-            let regexp = /(^([0-9a-z]{8})-([0-9a-z]{4})-([0-9a-z]{4})-([0-9a-z]{4})-([0-9a-z]{12})$)/gui;
+    let urlDelete = newUrl + childId;
 
-            if (childId.match(regexp) == null) return;
+    let response = await fetch(urlDelete, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+    });
 
-            let urlDelete = newUrl + childId;
-
-            let response = await fetch(urlDelete, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json;charset=utf-8'
-                },
-            });
-
-            if (response.ok) {
-                parent.remove();
-            } else {
-                alert(`Ошибка HTTP: ${response.status} Пользователь с id ${childId} не найден`);
-            }
-        }
+    if (response.ok) {
+        parent.remove();
+    } else {
+        alert(`Ошибка HTTP: ${response.status} Пользователь с id ${childId} не найден`);
+    }
+}
 
 // раздел изменение пользователя
 // отделила ф-ию редактирования одной кнопки, навешиваю ее сразу при создании строки
-async function buttonEditingClick () {
-            // нашли строку, в которой нажата кнопка
-            let parentEd = this.closest(".tr-editing");
+async function buttonEditingClick() {
+    // нашли строку, в которой нажата кнопка
+    let parentEd = this.closest(".tr-editing");
 
-            // нужно найти поля ввода фамилия / имя данной строки и сделать их доступными для изменения
-            let childFirstName = parentEd.querySelector(".table-td-firstName");
-            let childLastName = parentEd.querySelector(".table-td-lastName");
+    // нужно найти поля ввода фамилия / имя данной строки и сделать их доступными для изменения
+    let childFirstName = parentEd.querySelector(".table-td-firstName");
+    let childLastName = parentEd.querySelector(".table-td-lastName");
 
-            // ищем 1 ребенка это id, нужен для чтения
-            let firstChildID = parentEd.firstElementChild.textContent; // id
+    // ищем 1 ребенка это id, нужен для чтения
+    let firstChildID = parentEd.firstElementChild.textContent; // id
 
-            let urlEditing = newUrl + firstChildID;
+    let urlEditing = newUrl + firstChildID;
 
-            if (childFirstName.disabled === true || childLastName.disabled === true) {
+    if (childFirstName.disabled === true || childLastName.disabled === true) {
 
-                childFirstName.disabled = false;
-                childLastName.disabled = false;
+        childFirstName.disabled = false;
+        childLastName.disabled = false;
 
-                if ((childFirstName.textContent == null || "") || (childLastName.textContent == null || "")) return;
-            } else {
+        if ((childFirstName.textContent == null || "") || (childLastName.textContent == null || "")) return;
+    } else {
 
-                childFirstName.disabled = true;
-                childLastName.disabled = true;
+        childFirstName.disabled = true;
+        childLastName.disabled = true;
 
-                let response = await fetch(urlEditing, {
-                    method: 'PUT',
-                    body: JSON.stringify({
-                        firstName: childFirstName.value,
-                        lastName: childLastName.value
-                    }),
-                    headers: {
-                        "Content-type": "application/json; charset=UTF-8"
-                    }
-                });
-                if (response.ok) {
-
-                    let text = await response.text();
-                    let updatedUser = JSON.parse(text);
-
-                    childFirstName.value = updatedUser.firstName;
-                    childLastName.value = updatedUser.lastName;
-                } else {
-                    alert("Ошибка HTTP: " + response.status);
-                }
+        let response = await fetch(urlEditing, {
+            method: 'PUT',
+            body: JSON.stringify({
+                firstName: childFirstName.value,
+                lastName: childLastName.value
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
             }
+        });
+        if (response.ok) {
+
+            let text = await response.text();
+            let updatedUser = JSON.parse(text);
+
+            childFirstName.value = updatedUser.firstName;
+            childLastName.value = updatedUser.lastName;
+        } else {
+            alert("Ошибка HTTP: " + response.status);
         }
+    }
+}
 
 // ф-ия для добавления 1 нового пользователя
 
@@ -137,8 +130,8 @@ async function addUser() {
 
     if (response.ok) {
 
-         let obj = await response.text();
-         let newUser = JSON.parse(obj);
+        let obj = await response.text();
+        let newUser = JSON.parse(obj);
 
         createRow(newUser.id, newUser.firstName, newUser.lastName);
 
@@ -185,10 +178,10 @@ function createRow(id, firstName, lastName) {
     td4.className = 'table-icon';
     td5.className = 'table-icon';
 
-//     td4.insertAdjacentHTML("afterbegin", `<button class="button buttonEditing">
-// <img class="icon editing-icon" src="icon/editing-icon.png" alt="Редактировать"></button>`);
-//     td5.insertAdjacentHTML("afterbegin", `<button class="button buttonDelete">
-// <img class="icon delete-icon" src="icon/delete-icon.png" alt="Удалить"></button>`);
+    //     td4.insertAdjacentHTML("afterbegin", `<button class="button buttonEditing">
+    // <img class="icon editing-icon" src="icon/editing-icon.png" alt="Редактировать"></button>`);
+    //     td5.insertAdjacentHTML("afterbegin", `<button class="button buttonDelete">
+    // <img class="icon delete-icon" src="icon/delete-icon.png" alt="Удалить"></button>`);
 
     let buttonEditing = document.createElement("button");
     buttonEditing.className = "button buttonEditing";
@@ -233,6 +226,6 @@ function enumerationUsers(array) {
 
     for (let index = 0; index <= array.length - 1; index++) {
 
-     createRow(array[index].id, array[index].firstName, array[index].lastName);
+        createRow(array[index].id, array[index].firstName, array[index].lastName);
     }
 }

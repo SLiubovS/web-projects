@@ -4,15 +4,21 @@
 Что не так в нижеприведённом тесте функции pow?
 
 it("Возводит x в степень n", function() {
-let x = 5;
+  let x = 5;
 
-let result = x;
-assert.equal(pow(x, 1), result);
+  let result = x;
+  assert.equal(pow(x, 1), result);
 
-result *= x;
-assert.equal(pow(x, 2), result);
+  result *= x;
+  assert.equal(pow(x, 2), result);
 
-result *= x;
-assert.equal(pow(x, 3), result);
+  result *= x;
+  assert.equal(pow(x, 3), result);
 });
 P.S. Тест не содержит синтаксических ошибок и успешно проходит.
+
+
+Ответ:
+
+Все 3 теста написаны в 1 функции, что именно не так сложно понять при ошибке, 
+переписала тесты, в работе использовала chai и mocha

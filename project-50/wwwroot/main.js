@@ -26,7 +26,6 @@ fetch(url.Files, {
                 .text()
                 .then(text => JSON.parse(text)) // text => JSON.parse(text) или (тоже самое) : function(text) { return JSON.parse(text); }
                 .then(enumerationFiles);
-
         } else {
             alert("Ошибка HTTP: " + response.status);
         }
@@ -55,17 +54,17 @@ function sendForm() {
 
 // аналог метода POST через XMLHttpRequest()
 
-    // let xhr = new XMLHttpRequest();
-    // xhr.open("POST", url.files);
-    // xhr.send(formData);
-    // xhr.onload = function () {
-    //     //  alert(`Загружено: ${xhr.status} ${xhr.response}`);
-    //     let obj = JSON.parse(xhr.response);
-    //     createRow(obj.id, obj.name);
-    // };
-    // xhr.onerror = function () { // происходит, только когда запрос совсем не получилось выполнить
-    //     alert(`Ошибка соединения`);
-    // };
+// let xhr = new XMLHttpRequest();
+// xhr.open("POST", url.files);
+// xhr.send(formData);
+// xhr.onload = function () {
+//     //  alert(`Загружено: ${xhr.status} ${xhr.response}`);
+//     let obj = JSON.parse(xhr.response);
+//     createRow(obj.id, obj.name);
+// };
+// xhr.onerror = function () { // происходит, только когда запрос совсем не получилось выполнить
+//     alert(`Ошибка соединения`);
+// };
 
 
 
@@ -132,7 +131,6 @@ function createRow(id, name) {
 function enumerationFiles(array) {
 
     for (let index = 0; index <= array.length - 1; index++) {
-
         createRow(array[index].id, array[index].name);
     }
 }

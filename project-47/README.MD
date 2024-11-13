@@ -7,6 +7,7 @@
 https://api.github.com/users/USERNAME.
 
 В песочнице есть тестовый пример.
+https://plnkr.co/edit/G6Pk1GrptIo1HVVQ?p=preview&preview
 
 Важные детали:
 

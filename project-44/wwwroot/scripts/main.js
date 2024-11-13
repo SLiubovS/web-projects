@@ -36,7 +36,8 @@ function onKeydown(ev) {
 function clickSubmitOk(e) {
     if (!text.value) {
         e.preventDefault();
-    } else {
+    }
+    else {
         alert(`Вы ввели: ${text.value}`);
     }
 }
