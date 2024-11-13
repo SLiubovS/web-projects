@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -32,51 +33,43 @@
         #arrowTop::before {
             content: '▲';
         }
-
     </style>
 
 </head>
+
 <body>
-<div id="matrix">
+    <div id="matrix">
+        <script>
+            for (let i = 0; i < 2000; i++) document.writeln(i)
+        </script>
+    </div>
+
+    <div id="arrowTop"></div>
+
     <script>
-        for (let i = 0; i < 2000; i++) document.writeln(i)
-    </script>
-</div>
 
-<div id="arrowTop"></div>
-
-<script>
-
-    let arrowTop = document.getElementById('arrowTop');
-    window.addEventListener("scroll", onScroll);
-    document.body.getBoundingClientRect();
-    arrowTop.hidden = true;
+        let arrowTop = document.getElementById('arrowTop');
+        window.addEventListener("scroll", onScroll);
+        document.body.getBoundingClientRect();
+        arrowTop.hidden = true;
 
 
-    // попробовать переписать задачу через scrollTo / scrollBy
-    function onScroll(ev) {
+        // попробовать переписать задачу через scrollTo / scrollBy
+        function onScroll(ev) {
 
-        if (window.scrollY > document.documentElement.clientHeight) { // если прокрутка в пикселях больше высоты окна браузера, то
-            arrowTop.hidden = false;
+            if (window.scrollY > document.documentElement.clientHeight) { // если прокрутка в пикселях больше высоты окна браузера, то
+                arrowTop.hidden = false;
 
-            arrowTop.onmousedown = function (event) {
-                document.documentElement.scrollTop = 0; // прокрутка документа равна 0, т.е. ее координата топ 0
+                arrowTop.onmousedown = function (event) {
+                    document.documentElement.scrollTop = 0; // прокрутка документа равна 0, т.е. ее координата топ 0
+                }
+            }
+            if (ev.scrollY < document.documentElement.clientHeight) { // если прокрутка в пикселях больше высоты окна браузера, то
+                arrowTop.hidden = true;
             }
         }
-        if (ev.scrollY < document.documentElement.clientHeight) { // если прокрутка в пикселях больше высоты окна браузера, то
-            arrowTop.hidden = true;
-        }
-    }
 
-
-    // что имеем:
-    // 1. высоту окна браузера, которая не изменяется
-    // 2. координаты верхнего левого угла, которые изменяются относительно документа при прокрутке
-    // 3. если топ верхнего левого угла станет больше высоты окна браузера - изменить дисплэй стрелки?
-    // 4. при keyduwn на кнопку - совмещать левый верхний угол окна с началом браузера координаты топ 0.ю лефт 0
-    // 5. при keyup - ? нужен ли, по идее можно обнулять в null ?
-
-
-</script>
+    </script>
 </body>
+
 </html>

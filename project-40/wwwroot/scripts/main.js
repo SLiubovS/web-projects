@@ -39,7 +39,6 @@ function blur() {
 
     function end() {
         view.innerHTML = textarea.value;
-
     }
 }
 

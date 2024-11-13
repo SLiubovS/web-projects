@@ -2,7 +2,7 @@
 let slider = document.getElementById('slider'); // серая полоса для синего бегунка
 let thumb = document.getElementsByClassName('thumb')[0]; //синий бегунок
 
-thumb.onmousedown = function(event) {
+thumb.onmousedown = function (event) {
 
     let shiftX = event.clientX - thumb.getBoundingClientRect().left;
 
@@ -20,7 +20,6 @@ thumb.onmousedown = function(event) {
         if (newLeft > rightEdge) {
             newLeft = rightEdge;
         }
-
         thumb.style.left = newLeft + 'px';
     }
 
@@ -28,10 +27,9 @@ thumb.onmousedown = function(event) {
         document.removeEventListener('mouseup', onMouseUp);
         document.removeEventListener('mousemove', onMouseMove);
     }
-
 };
 
-thumb.ondragstart = function() {
+thumb.ondragstart = function () {
     return false;
 };
 

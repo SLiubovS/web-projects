@@ -14,15 +14,13 @@ class DraggableElement {
         let y = pageY - this.shiftY;
 
         // проверяем будет ли выходить элемент за левую гранцу экрана
-        if (x < 0)
-        {
+        if (x < 0) {
             // если будет выходить, то корректируем его координату по X
             x = 0;
         }
 
         // проверяем будет ли выходить элемент за правую гранцу экрана
-        if (document.body.offsetWidth - (x + this.element.offsetWidth) < 0)
-        {
+        if (document.body.offsetWidth - (x + this.element.offsetWidth) < 0) {
             // если будет выходить, то корректируем его координату по X
             x = document.body.offsetWidth - this.element.offsetWidth;
         }
@@ -36,15 +34,13 @@ class DraggableElement {
 
 
         // проверяем будет ли выходить элемент за верхнюю гранцу экрана
-        if (y < 0)
-        {
+        if (y < 0) {
             // если будет выходить, то корректируем его координату по Y
             y = 0;
         }
 
         // проверяем будет ли выходить элемент за нижнюю гранцу экрана
-        if (scrollHeight - (y + this.element.offsetHeight) < 0)
-        {
+        if (scrollHeight - (y + this.element.offsetHeight) < 0) {
             // если будет выходить, то корректируем его координату по Y
             y = scrollHeight - this.element.offsetHeight;
         }

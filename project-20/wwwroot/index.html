@@ -1,27 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+
 <body>
-<input type="button" id="hider" value="Нажмите, чтобы спрятать текст"/>
+    <input type="button" id="hider" value="Нажмите, чтобы спрятать текст" />
 
-<div id="text">Текст</div>
+    <div id="text">Текст</div>
 
-<script>
-    let div = document.getElementById("text");
-    let hider = document.getElementById("hider");
-    hider.onclick = function () {
-        div.style.display = "none";
+    <script>
+        let div = document.getElementById("text");
+        let hider = document.getElementById("hider");
+        hider.onclick = function () {
+            div.style.display = "none";
 
 
-        // задача 2:
-        // чтобы пропадала кнопка нужно в коде выше вместо 15 и 16 строк сделать:
-        //    hider.onclick = function () {
-        //    hider.style.display = "none";
-        // }
-    }
-</script>
+            // задача 2:
+            // чтобы пропадала кнопка нужно в коде выше вместо 15 и 16 строк сделать:
+            //    hider.onclick = function () {
+            //    hider.style.display = "none";
+            // }
+        }
+    </script>
 </body>
+
 </html>

@@ -14,8 +14,7 @@ divHouse.onmouseover = function (event) {
 
     if (tooltipElement != null) {
 
-        if (divTooltip != null)
-        {
+        if (divTooltip != null) {
             divTooltip.remove();
         }
 
@@ -38,8 +37,7 @@ divHouse.onmouseover = function (event) {
 }
 
 divHouse.onmouseout = function () {
-    if (divTooltip != null)
-    {
+    if (divTooltip != null) {
         divTooltip.remove();
     }
 };

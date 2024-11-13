@@ -1,5 +1,5 @@
 let div = document.getElementById("field");
-let ball= document.getElementById("ball");
+let ball = document.getElementById("ball");
 
 let centerWidthField = (div.offsetWidth - (div.scrollWidth - div.clientWidth) - (div.clientLeft * 2)) / 2;
 

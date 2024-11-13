@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+
 <body>
-<h1>Прокрути меня</h1>
+    <h1>Прокрути меня</h1>
 
-<script>
+    <script>
 
-    let date = new Date();
+        let date = new Date();
 
-    document.body.style.height = '1000px';
+        document.body.style.height = '1000px';
 
-    let scrollHeight = Math.max( // вычисляем полную высоту документа
-        document.body.scrollHeight, document.documentElement.scrollHeight,
-        document.body.offsetHeight, document.documentElement.offsetHeight,
-        document.body.clientHeight, document.documentElement.clientHeight
-    );
+        let scrollHeight = Math.max( // вычисляем полную высоту документа
+            document.body.scrollHeight, document.documentElement.scrollHeight,
+            document.body.offsetHeight, document.documentElement.offsetHeight,
+            document.body.clientHeight, document.documentElement.clientHeight
+        );
 
-    let allH = scrollHeight - 100; // полная высота документа - 100 px;
-    let lastDiv = null;
+        let allH = scrollHeight - 100; // полная высота документа - 100 px;
+        let lastDiv = null;
 
         document.addEventListener('scroll', function (event) {
             // считать координаты документа
@@ -32,25 +34,25 @@
                 // когда прокрутка произошла до конца, мы должны запустить цикл, чтобы создавались новые див снова и снова..
                 // когда в видимой часть документа есть свободное место
                 //или созданный див и добавленный в боди вне видимость clientHeight, значит страница заполнена дивами полностью
-                divShow ();
+                divShow();
                 lastClassDiv();
                 console.log(lastDiv.innerHTML);
             }
-            // divShow ();
-            // divShow ();
-            // divShow ();
-            // divShow ();
-            // divShow ();
+            divShow();
+            divShow();
+            divShow();
+            divShow();
+            divShow();
         });
 
-        function divShow () {
+        function divShow() {
             let div = document.createElement('div');
             div.innerHTML = `Date: ${date}`;
             document.body.append(div);
             div.classList = "many";
 
             let span = document.createElement('div');
-            span.innerHTML = "Это второй контейнер";
+            //span.innerHTML = "Это второй контейнер";
             document.body.append(span);
             span.classList = "many";
         }
@@ -58,15 +60,13 @@
             lastDiv = document.querySelectorAll("document.body > .many:last-child");
         }
 
-    //     if ((window.innerHeight - 100) ) {
-    //         let div = document.createElement('div');
-    //         div.innerHTML = "Date: ${date}`;
-    //         document.body.append(div);
-    //     }
-    //
-    //
-    // });
+        if ((window.innerHeight - 100)) {
+            let div = document.createElement('div');
+            div.innerHTML = `Date: ${date}`;
+            document.body.append(div);
+        }
 
-</script>
+    </script>
 </body>
+
 </html>

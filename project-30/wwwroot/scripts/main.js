@@ -1,5 +1,4 @@
 const thumbs = document.getElementById("thumbs");
-
 const p = document.getElementsByTagName("p")[0];
 
 thumbs.onclick = function (event) {
@@ -17,9 +16,7 @@ thumbs.onclick = function (event) {
     let bigImg = document.createElement("img");
 
     bigImg.id = "largeImg";
-
     bigImg.alt = "Large image";
-
     bigImg.src = href;
 
     p.append(bigImg);

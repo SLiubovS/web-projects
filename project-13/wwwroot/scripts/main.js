@@ -9,4 +9,3 @@ let liLast = document.querySelector('ul > li:last-child');
 let li3 = document.createElement('li');
 li3.innerHTML = '3';
 liLast.before(li3);
-

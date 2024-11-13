@@ -27,7 +27,6 @@ function showVisible() {
             img.dataset.src = '';
         }
     }
-
 }
 
 showVisible();

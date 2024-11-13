@@ -12,4 +12,4 @@
 Она создаёт и показывает элемент-«заметку» с текстом html на заданной позиции position рядом с элементом anchor.
 
 Демо заметки:
-
+https://learn.javascript.ru/task/position-at

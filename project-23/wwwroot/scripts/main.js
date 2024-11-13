@@ -15,8 +15,8 @@ div.onclick = function clickClick() {
         span2.style.display = "inline-block";
         span1.style.display = "none";
         ul.style.display = "none";
-
     }
+
     if (div.classList.contains("divAfter")) {
 
         span1.style.display = "inline-block";

@@ -1,65 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="styles/style.css">
 </head>
+
 <body>
-<ul>
-    <li>Животные
-        <ul>
-            <li>Млекопитающие
-                <ul>
-                    <li>Коровы</li>
-                    <li>Ослы</li>
-                    <li>Собаки</li>
-                    <li>Тигры</li>
-                </ul>
-            </li>
-            <li>Другие
-                <ul>
-                    <li>Змеи</li>
-                    <li>Птицы</li>
-                    <li>Ящерицы</li>
-                </ul>
-            </li>
-        </ul>
-    </li>
-    <li>Рыбы
-        <ul>
-            <li>Аквариумные
-                <ul>
-                    <li>Гуппи</li>
-                    <li>Скалярии</li>
-                </ul>
-            </li>
-            <li>Морские
-                <ul>
-                    <li>Морская форель</li>
-                </ul>
-            </li>
-        </ul>
-    </li>
-</ul>
-<script src="scripts/main.js"></script>
-<script>
-    for (let element of document.querySelectorAll("ul > li")) {
+    <ul>
+        <li>Животные
+            <ul>
+                <li>Млекопитающие
+                    <ul>
+                        <li>Коровы</li>
+                        <li>Ослы</li>
+                        <li>Собаки</li>
+                        <li>Тигры</li>
+                    </ul>
+                </li>
+                <li>Другие
+                    <ul>
+                        <li>Змеи</li>
+                        <li>Птицы</li>
+                        <li>Ящерицы</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>Рыбы
+            <ul>
+                <li>Аквариумные
+                    <ul>
+                        <li>Гуппи</li>
+                        <li>Скалярии</li>
+                    </ul>
+                </li>
+                <li>Морские
+                    <ul>
+                        <li>Морская форель</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <script src="scripts/main.js"></script>
+    <script>
+        for (let element of document.querySelectorAll("ul > li")) {
 
-        let children = element.getElementsByTagName("li");
-        let text = element.childNodes[0].textContent.trim();
+            let children = element.getElementsByTagName("li");
+            let text = element.childNodes[0].textContent.trim();
 
-
-        // alert(`${text}: ${children.length}`);
-        if(children.length === 0) {
-           continue;
-        } else {
-            // element.insertAdjacentText('beforeend', children.length);
-            element.childNodes[0].after(` [${children.length}]`);
+            if (children.length === 0) {
+                continue;
+            } else {
+                // element.insertAdjacentText('beforeend', children.length);
+                element.childNodes[0].after(` [${children.length}]`);
+            }
         }
-    }
 
-
-</script>
+    </script>
 </body>
+
 </html>

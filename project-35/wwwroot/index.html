@@ -1,49 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+
 <body>
 
-<div>Нажмите "Q" и "W" вместе (язык значения не играет).</div>
+    <div>Нажмите "Q" и "W" вместе (язык значения не играет).</div>
 
-<script>
+    <script>
 
-    function runOnKeys(func, ...codes) {
+        function runOnKeys(func, ...codes) {
 
-        let collection = new Set();
+            let collection = new Set();
 
-        document.addEventListener('keydown', onKeydown);
-        document.addEventListener('keyup', onKeyup);
+            document.addEventListener('keydown', onKeydown);
+            document.addEventListener('keyup', onKeyup);
 
-        function onKeydown(event) {
+            function onKeydown(event) {
 
-            collection.add(event.code);
+                collection.add(event.code);
 
-            let hasCodes = true;
+                let hasCodes = true;
 
-            for (let code of codes) {
-                hasCodes &&= collection.has(code);
+                for (let code of codes) {
+                    hasCodes &&= collection.has(code);
+                }
+
+                if (hasCodes) {
+                    func();
+                    onKeyup();
+                }
             }
 
-            if (hasCodes) {
-                func();
-                onKeyup();
+            function onKeyup(event) {
+                collection.clear();
             }
         }
 
-        function onKeyup(event) {
-            collection.clear();
-        }
-    }
+        runOnKeys(
+            () => alert("Привет!"),
+            "KeyQ",
+            "KeyW"
+        );
 
-    runOnKeys(
-        () => alert("Привет!"),
-        "KeyQ",
-        "KeyW"
-    );
-
-</script>
+    </script>
 </body>
+
 </html>
