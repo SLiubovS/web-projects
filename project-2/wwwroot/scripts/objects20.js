@@ -15,9 +15,9 @@ const objects20 = function () {
 
     let x = +prompt('Введите число', '');
 
-    if(isNaN(x)) {
+    if (isNaN(x)) {
         alert('Вы ввели не число');
-    } else if(x <= 0) {
+    } else if (x <= 0) {
         alert('Неверно, введите положительное число');
     }
 
@@ -39,6 +39,6 @@ const objects20 = function () {
 
 
 
-    alert( factorial(x) );
+    alert(factorial(x));
 
 };

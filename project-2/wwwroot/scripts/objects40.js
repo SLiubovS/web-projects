@@ -16,7 +16,6 @@ const objects40 = function () {
         if (a === b) return 0;
         if (a < b) return 1;
     }
-
     arr.sort(sortDescending);
     alert(arr);
 };

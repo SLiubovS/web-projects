@@ -15,6 +15,5 @@ const objects17 = function () {
         }
         return a;
     }
-
     alert(min(6, 10));  // самостоятельная проверка
 };

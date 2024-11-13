@@ -18,21 +18,20 @@
 
 const objects43 = function () {
 
-    let vasya = {name: "Вася", age: 25};
-    let petya = {name: "Петя", age: 30};
-    let masha = {name: "Маша", age: 28};
+    let vasya = { name: "Вася", age: 25 };
+    let petya = { name: "Петя", age: 30 };
+    let masha = { name: "Маша", age: 28 };
 
     let users = [vasya, petya, masha];
+
     // мое решение
     // let names = [];
     // let fil = users.filter(item => item.age > 24);
     // for (item of fil) {
-    //
-    //     names.push(`${item.name}`);
-
+    // names.push(`${item.name}`);
     // }
 
-    // решение Димы
+    // решение профи
     let names = users.map(item => item.name);
     alert(names);
 };

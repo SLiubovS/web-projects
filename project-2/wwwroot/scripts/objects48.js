@@ -34,6 +34,5 @@ const objects48 = function () {
         }
         return str;
     }
-
     alert(unique(strings));
 };

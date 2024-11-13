@@ -9,16 +9,14 @@
 //
 // P.S. В этой задаче функция обязана поддерживать только натуральные значения n, т.е. целые от 1 и выше.
 
-const objects18 = function (){
+const objects18 = function () {
     let x = prompt('x?', '');
     let n = prompt('n?', '');
-
     function pow(x, n) {
         if (n < 1) {
             alert("Степень не поддерживается, используйте натуральное число");
         }
         return (x ** n);
     }
-
     alert(pow(x, n));
 };

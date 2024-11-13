@@ -1,7 +1,7 @@
 // тестовое задание объект с методом
 // метод = функция внутри объекта
 
-const objects8 = function (){
+const objects8 = function () {
     let cat = {
         mustache: 10,
         paws: "не измеряли",
@@ -12,6 +12,5 @@ const objects8 = function (){
             alert('Мяууу! А усы у меня ' + this.mustache + " см");
         }
     };
-
     cat.may(); // вызов метода
 };

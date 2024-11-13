@@ -34,11 +34,11 @@
 
 const objects49 = function () {
 
-let users = [
-    {id: 'john', name: "John Smith", age: 20},
-    {id: 'ann', name: "Ann Smith", age: 24},
-    {id: 'pete', name: "Pete Peterson", age: 31},
-];
+    let users = [
+        { id: 'john', name: "John Smith", age: 20 },
+        { id: 'ann', name: "Ann Smith", age: 24 },
+        { id: 'pete', name: "Pete Peterson", age: 31 },
+    ];
 
     function groupById(arr) {
         return arr.reduce((obj, value) => {
@@ -52,5 +52,4 @@ let users = [
     for (key in obj) {
         alert(`key = ${key}, id = ${obj[key].id}, name = ${obj[key].name}, age = ${obj[key].age}`);
     }
-
 };

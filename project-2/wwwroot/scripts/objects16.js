@@ -16,7 +16,7 @@
 
 const objects16 = function () {
     function checkAge(age) {
-        return (age>18) || (confirm('Родители разрешили?'));
+        return (age > 18) || (confirm('Родители разрешили?'));
     }
 
     let age = prompt('Введите свой возраст', '6');

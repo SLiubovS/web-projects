@@ -22,8 +22,8 @@ const objects24 = function () {
         }
     }
 
-    let phone = new Phone("+79258317839");
-    alert(phone.myNumber); // выведем на экран +79258317839
+    let phone = new Phone("+79250001122");
+    alert(phone.myNumber); // выведем на экран +79250001122
     alert(phone.otherNumber); // выведем на экран null
     phone.startCall("+79031722479");
     alert(phone.otherNumber); // выведем на экран +79031722479

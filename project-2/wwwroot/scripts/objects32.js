@@ -2,9 +2,9 @@
 
 // Есть стоимость в виде строки "$120". То есть сначала идёт знак валюты, а затем – число.
 //
-//     Создайте функцию extractCurrencyValue(str), которая будет из такой строки выделять числовое значение и возвращать его.
+// Создайте функцию extractCurrencyValue(str), которая будет из такой строки выделять числовое значение и возвращать его.
 //
-//     Например:
+// Например:
 //
 // alert( extractCurrencyValue('$120') === 120 ); // true
 
@@ -25,10 +25,8 @@ const objects32 = function () {
                 result += char;
             }
         }
-
         return result;
     }
-
     let inputStr = prompt('Введите строку', '$120');
     alert(extractCurrencyValue(inputStr));
 };

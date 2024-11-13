@@ -18,9 +18,9 @@
 
 const objects47 = function () {
 
-    let vasya = {name: "Вася", age: 25};
-    let petya = {name: "Петя", age: 30};
-    let masha = {name: "Маша", age: 29};
+    let vasya = { name: "Вася", age: 25 };
+    let petya = { name: "Петя", age: 30 };
+    let masha = { name: "Маша", age: 29 };
 
     let arr = [vasya, petya, masha];
 
@@ -33,14 +33,12 @@ const objects47 = function () {
             if (item.age) {
                 array.push(item.age);
             }
-
         }
         for (let items of array) {
             result += items;
         }
         let results = result / array.length;
-
         return results;
     }
-    alert( getAverageAge(arr) );
+    alert(getAverageAge(arr));
 };

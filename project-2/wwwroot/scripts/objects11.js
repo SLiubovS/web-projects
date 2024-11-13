@@ -26,7 +26,7 @@
 // ladder.up().up().down().showStep().down().showStep(); // показывает 1 затем 0
 // Такой подход широко используется в библиотеках JavaScript.
 
-const objects11 = function (){
+const objects11 = function () {
     let ladder = {
         step: 0,
         up() {

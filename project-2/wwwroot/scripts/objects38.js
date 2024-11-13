@@ -23,9 +23,7 @@ const objects38 = function () {
 
         let range = arr.filter(item => (item >= a) && (item <= b));
         alert(range);
-
     }
-
 
     let filtered = filterRange(arr, 1, 4);
     filtered = filterRange(arr, 4, 8);  // для проверки
@@ -33,6 +31,4 @@ const objects38 = function () {
     filtered = filterRange(arr, 3, 6);  // для проверки
 
     alert(arr);
-
-
 };

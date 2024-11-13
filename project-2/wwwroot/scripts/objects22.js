@@ -14,13 +14,13 @@ const objects22 = function () {
             this.a = prompt('a?', '');
             this.b = prompt('b?', '');
             this.c = prompt('c?', '');
-            },
+        },
 
         p() {
             return (+this.a + +this.b + +this.c);
         },
         area() {
-            return ((this.p() * ((this.p() - this.a) * (this.p() - this.b) * (this.p() - this.c))) ** (1/2));
+            return ((this.p() * ((this.p() - this.a) * (this.p() - this.b) * (this.p() - this.c))) ** (1 / 2));
         }
     }
     triangle.read();

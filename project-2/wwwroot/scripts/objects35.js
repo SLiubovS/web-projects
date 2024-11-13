@@ -6,8 +6,8 @@
 
 
 const objects35 = function () {
-let i = +prompt('Введите i', '');
-let j = +prompt('Введите j', '');
+    let i = +prompt('Введите i', '');
+    let j = +prompt('Введите j', '');
 
     let matrix = [
         [1, 2, 3],

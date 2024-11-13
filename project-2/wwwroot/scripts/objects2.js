@@ -8,8 +8,8 @@
 
 // вариант 2
 
-const objects2 = function() {
-    let user=  {};
+const objects2 = function () {
+    let user = {};
     user.name = "John";
     alert(user.name);
     user.surname = 'Smith';

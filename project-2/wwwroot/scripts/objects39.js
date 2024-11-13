@@ -25,7 +25,6 @@ const objects39 = function () {
         let num = arr.length;
         arr.splice(0, num, place);
     }
-
     filterRangeInPlace(arr, 1, 4);
     alert(arr);
 };

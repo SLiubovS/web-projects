@@ -23,11 +23,8 @@ const objects26 = function () {
             if (isNaN(a)) {
                 continue;
             }
-
             return a;
         }
     }
-
     alert("Число: " + readNumber());
-
 };

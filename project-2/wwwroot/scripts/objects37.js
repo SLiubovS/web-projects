@@ -16,9 +16,9 @@
 const objects37 = function () {
     function camelize(str) {
 
-        alert (`Было: ${str}`);
-        let items = str.split('-');
+        alert(`Было: ${str}`);
 
+        let items = str.split('-');
         let results = items.map((item, index) => {
 
             if (index === 0) {
@@ -26,7 +26,7 @@ const objects37 = function () {
             }
 
             let result = '';
-            // решение Димы
+            // решение от профи
             let hasUpper = false;
 
             for (let char of item) {
@@ -39,12 +39,11 @@ const objects37 = function () {
                 }
             }
 
-// мое решение ниже, делает тоже самое
+            // мое решение ниже, делает тоже самое
             // for (i = 0; i < item.length; i++) {
             //     if (i === 0) {
             //         result += item[0].toUpperCase();
             //     } else {
-            //
             //         result += item[i];
             //     }
             // }

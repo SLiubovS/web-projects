@@ -48,27 +48,26 @@ const objects42 = function () {
                 result = +arr[0] + +arr[2];
             } else if (arr[1] === '-') {
                 result = +arr[0] - +arr[2];
-            } else if (arr[1] === '+')
+            }
             return result;
         }
-//         this.addMethod = function (name, func) {
-//             this.functions.set(name, func); // не понимаю, если использовать решили map, то откуда в этой строке set ?
-// //             let map = new Map();
-// //             map.set("*", (a * b));
-// //             map.set("/", (a / b));
-// //             map.set("**", (a ** b));
-// // alert (map.get('*'));
-//             if (name === '*') {
-//                 return sum(a, b);
-//             } else if (name === '/') {
-//                 return (a / b);
-//             } else if (name === '/') {
-//                 return (a ** b);
-//             }
-//
-// // не понимаю как тут map использовать и хапуталась, что в итоге получаем, переписав задачу..
-//
-//         }
+        this.addMethod = function (str) {
+
+            let arr = str.split(' ');
+            let name = arr[1];
+            let a = arr[0];
+            let b = arr[2];
+
+            if (name === '*') {
+                return (a * b);
+            }
+            else if (name === '/') {
+                return (a / b);
+            }
+            else if (name === '**') {
+                return (a ** b);
+            }
+        }
     }
 
     let calc = new Calculator();
@@ -77,7 +76,6 @@ const objects42 = function () {
     alert(calc.calculate("3 - 7"));
 
     let powerCalc = new Calculator;
-    powerCalc.addMethod();
-    let results = powerCalc.calculate("2 ** 3");
-alert( results ); // 8
+    let results = powerCalc.addMethod("2 ** 3");
+    alert(results); // 8
 };
