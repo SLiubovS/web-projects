@@ -33,6 +33,5 @@ const objects54 = function () {
         }
         return sum;
     }
-
     alert(sumSalaries(salaries));
 };

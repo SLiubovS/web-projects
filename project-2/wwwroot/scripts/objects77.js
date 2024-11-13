@@ -9,7 +9,6 @@
 //     constructor(name) {
 //         this.name = name;
 //     }
-//
 // }
 //
 // class Rabbit extends Animal {
@@ -30,7 +29,6 @@ const objects77 = function () {
         constructor(name) {
             this.name = name;
         }
-
     }
 
     class Rabbit extends Animal {

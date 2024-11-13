@@ -32,10 +32,7 @@ const objects53 = function () {
         for (let key2 of map.keys()) {
             arr2.push(key2);
         }
-
         return arr2;
     }
-
     alert(aclean(array));
-
 };

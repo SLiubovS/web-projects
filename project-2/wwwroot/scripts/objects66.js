@@ -16,8 +16,6 @@ const objects66 = function () {
 
     let json = JSON.stringify(user);
 
-    alert(json); // выводила для проверки, необязательно
-
     let jsonObj = JSON.parse(json);
 
     alert(`${jsonObj.name}, ${jsonObj.age},`); // выводила для проверки, необязательно

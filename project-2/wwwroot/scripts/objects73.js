@@ -24,25 +24,23 @@
 
 const objects73 = function () {
 
-function inBetween(a, b) {
+    function inBetween(a, b) {
 
-    return function (x) {
-      return x >= a && x <= b;
-    };
+        return function (x) {
+            return x >= a && x <= b;
+        };
 
-}
+    }
 
-function inArray(arr) {
+    function inArray(arr) {
 
-    return function (y) {
-
-        return arr.includes(y);
-    };
-
-}
+        return function (y) {
+            return arr.includes(y);
+        };
+    }
 
     let arr = [1, 2, 3, 4, 5, 6, 7];
 
-    alert( arr.filter(inBetween(3, 6)) );
-    alert( arr.filter(inArray([1, 2, 10])) );
+    alert(arr.filter(inBetween(3, 6)));
+    alert(arr.filter(inArray([1, 2, 10])));
 };

@@ -35,7 +35,6 @@ const objects68 = function () {
         // }
         // return (sum + n);
 
-
         // 2. вариант через рекурсию
 
         // if (n === 1) {
@@ -45,12 +44,9 @@ const objects68 = function () {
         //     return sum;
         // }
 
-
         // 3. вариант через арифметическую прогрессию
 
         return n * (n + 1) / 2;
-
     }
-
     alert(sumTo(100));
 };

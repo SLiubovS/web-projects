@@ -23,19 +23,19 @@
 
 const objects71 = function () {
 
-let list = {
-    value: 1,
-    next: {
-        value: 2,
+    let list = {
+        value: 1,
         next: {
-            value: 3,
+            value: 2,
             next: {
-                value: 4,
-                next: null
+                value: 3,
+                next: {
+                    value: 4,
+                    next: null
+                }
             }
         }
-    }
-};
+    };
 
     function printList(list) {
 
@@ -53,8 +53,7 @@ let list = {
 
         if (list.next) {
             printList(list.next);
-
         }
     }
-printList(list);
+    printList(list);
 };

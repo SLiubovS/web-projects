@@ -21,15 +21,7 @@
 
 const objects79 = function () {
 
-
-alert( document.body.firstElementChild );
-
-alert( document.body.children[1]);
-
-    alert( document.body.children[1].lastElementChild);
-
-
-
-
-
+    alert(document.body.firstElementChild);
+    alert(document.body.children[1]);
+    alert(document.body.children[1].lastElementChild);
 };

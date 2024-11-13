@@ -21,10 +21,7 @@ const objects55 = function () {
     };
 
     function count(obj) {
-
         return Object.keys(user).length;
-
     }
-
     alert(count(user)); // 2
 };

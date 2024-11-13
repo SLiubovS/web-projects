@@ -19,9 +19,7 @@
 //
 //     P.P.S. Используйте Set для хранения уникальных значений.
 
-
 const objects52 = function () {
-
 
     function unique(arr) {
         let set = new Set();
@@ -32,14 +30,11 @@ const objects52 = function () {
         for (let j of set) {
             array.push(j);
         }
-
         return array;
     }
 
     let values = ["Hare", "Krishna", "Hare", "Krishna",
         "Krishna", "Krishna", "Hare", "Hare", ":-O"
     ];
-
     alert(unique(values)); // Hare,Krishna,:-O
-
 };

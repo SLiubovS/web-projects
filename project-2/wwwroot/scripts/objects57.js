@@ -24,10 +24,7 @@ const objects57 = function () {
 
     function topSalary(salaries) {
 
-        // решение Димы:
         let salaryPairs = Object.entries(salaries);
-
-        // salaryPairs = [["John", 100], ["Pete", 300], ["Mary", 250]];
 
         let salaryObjects = [];
 
@@ -39,8 +36,6 @@ const objects57 = function () {
                 });
         }
 
-        // salaryObjects = [ {name: "John", salary: 100}, {name: "Pete", salary: 300}, {name: "Mary", salary: 250} ];
-
         function bigSalary(a, b) {
             if (a.salary > b.salary) return -1;
             if (a.salary < b.salary) return 1;
@@ -51,6 +46,8 @@ const objects57 = function () {
 
         return sortedSalaryObjects[0].name;
 
+
+        // длинный вариант решения через сортировку
         // let arr = Object.entries(salaries);
         // let array = [];
         // let [user1, user2, user3] = arr;
@@ -80,8 +77,6 @@ const objects57 = function () {
         // } if (array[0] === salary3) {
         //     return name3;
         // }
-
     }
-
     alert(topSalary(salaries));
 };

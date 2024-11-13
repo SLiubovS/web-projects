@@ -30,7 +30,7 @@ const objects56 = function () {
         years: 30
     };
 
-    let {name: name, years: age, isAdmin = false} = user;
+    let { name: name, years: age, isAdmin = false } = user;
 
     alert(name); // John
     alert(age); // 30

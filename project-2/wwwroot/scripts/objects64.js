@@ -19,6 +19,5 @@ const objects64 = function () {
         let diff = tomorrow - now; // разница в миллисекундах
         return Math.round(diff / 1000); // преобразуем в секунды
     }
-
     alert(getSecondsToTomorrow());
 };
