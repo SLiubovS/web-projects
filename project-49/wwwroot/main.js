@@ -1,5 +1,5 @@
-let url = "http://localhost:5000/api/Users";
-let newUrl = "http://localhost:5000/api/Users/";
+let url = "http://localhost:8080/api/Users";
+let newUrl = "http://localhost:8080/api/Users/";
 let tbodyHead = document.getElementById("tbodyHead");
 
 // раздел получения всех пользователей

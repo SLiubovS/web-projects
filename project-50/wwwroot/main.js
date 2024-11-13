@@ -1,6 +1,6 @@
 let url = {
-    Files: "http://localhost:5000/api/Files",
-    Id: "http://localhost:5000/api/Files/"
+    Files: "http://localhost:8080/api/Files",
+    Id: "http://localhost:8080/api/Files/"
 }
 let tbody = document.getElementById("tbody");
 let inputFile = document.getElementById("inputFile");
